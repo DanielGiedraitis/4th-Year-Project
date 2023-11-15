@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Diversity in Computing</title>
+</head>
+<body>
+    <div class="d-flex flex-column justify-content-center w-100 h-100">
+        <div class="container">
+            <h1>Diversity in Computing</h1>
+            <form action="/analyze" method="post">
+                <textarea name="text" placeholder="Enter Description to analyze"></textarea>
+                <button type="submit">Analyze</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
+

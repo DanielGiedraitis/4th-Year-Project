@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Analysis Result - Diversity in Computing</title>
+</head>
+<body>
+    <div class="container result-container">
+        <h1>Analysis Result</h1>
+        <p>Text: {{ text }}</p>
+        <p>Educational Score: {{ edu_score }}</p>
+        <p>Social Score: {{ social_score }}</p>
+        <p>Technological Score: {{ tech_score }}</p>
+        <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>
+
+

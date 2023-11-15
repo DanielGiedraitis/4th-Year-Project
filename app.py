@@ -14,9 +14,10 @@ app = Flask(__name__)
 def load_lemmas():
     workbook = openpyxl.load_workbook('Lemmas.xlsx', read_only=True)
 
-    educational_lemmas = set(row[0].value for row in workbook['Educational'].iter_rows(min_col=1, max_col=1))
-    social_lemmas = set(row[0].value for row in workbook['Social'].iter_rows(min_col=1, max_col=1))
-    technical_lemmas = set(row[0].value for row in workbook['Technical'].iter_rows(min_col=1, max_col=1))
+    educational_lemmas = set(row[0].value for row in workbook['Educational'].iter_rows(min_row=2, max_col=1))
+    social_lemmas = set(row[0].value for row in workbook['Social'].iter_rows(min_row=2, max_col=1))
+    technical_lemmas = set(row[0].value for row in workbook['Technical'].iter_rows(min_row=2, max_col=1))
+
 
     return educational_lemmas, social_lemmas, technical_lemmas
 
@@ -65,6 +66,11 @@ def analyze():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+
+
 
 
 

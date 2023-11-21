@@ -29,6 +29,8 @@ textarea {
 
 .result-container {
     text-align: center;
+    max-width: 900px; 
+    margin: 0 auto; 
 }
 
 @keyframes gradient {
@@ -44,6 +46,7 @@ textarea {
         background-position: 0% 50%;
     }
 }
+
 
 
 

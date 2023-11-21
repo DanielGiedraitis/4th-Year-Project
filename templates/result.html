@@ -9,13 +9,12 @@
 <body>
     <div class="container result-container">
         <h1>Analysis Result</h1>
-        <p>Text: {{ text }}</p>
         <p>Educational Score: {{ edu_score }}</p>
         <p>Social Score: {{ social_score }}</p>
         <p>Technological Score: {{ tech_score }}</p>
+        <p>Recommended Modifications:</p>
+        <textarea readonly>{{ modified_text }}</textarea>
         <a href="/">Back to Home</a>
     </div>
 </body>
 </html>
-
-

@@ -14,22 +14,21 @@ app = Flask(__name__)
 def load_lemmas():
     workbook = openpyxl.load_workbook('Lemmas.xlsx', read_only=True)
 
-    educational_lemmas = set(row[0].value for row in workbook['Educational'].iter_rows(min_row=2, max_col=1))
-    social_lemmas = set(row[0].value for row in workbook['Social'].iter_rows(min_row=2, max_col=1))
-    technical_lemmas = set(row[0].value for row in workbook['Technical'].iter_rows(min_row=2, max_col=1))
-
+    educational_lemmas = set(row[0].value.lower() for row in workbook['Educational'].iter_rows(min_row=2, max_col=1))
+    social_lemmas = set(row[0].value.lower() for row in workbook['Social'].iter_rows(min_row=2, max_col=1))
+    technical_lemmas = set(row[0].value.lower() for row in workbook['Technical'].iter_rows(min_row=2, max_col=1))
 
     return educational_lemmas, social_lemmas, technical_lemmas
 
 educational_lemmas, social_lemmas, technical_lemmas = load_lemmas()
 
-# NLTK resources
 stop_words = set(stopwords.words('english'))
 porter = PorterStemmer()
 
 # Function to preprocess and tokenize text
 def preprocess_and_tokenize(text):
     words = word_tokenize(text.lower())
+
     # Remove stop words and non-alphabetic words
     words = [porter.stem(word) for word in words if word.isalpha() and word not in stop_words]
     return words
@@ -37,10 +36,15 @@ def preprocess_and_tokenize(text):
 def analyze_text(text):
     words = preprocess_and_tokenize(text)
 
+    # Convert lemma sets to lowercase for case-insensitive comparison
+    educational_lemmas_lower = {lemma.lower() for lemma in educational_lemmas}
+    social_lemmas_lower = {lemma.lower() for lemma in social_lemmas}
+    technical_lemmas_lower = {lemma.lower() for lemma in technical_lemmas}
+
     # Count occurrences of lemmas from each category
-    educational_count = sum(1 for word in words if word in educational_lemmas)
-    social_count = sum(1 for word in words if word in social_lemmas)
-    technological_count = sum(1 for word in words if word in technical_lemmas)
+    educational_count = sum(1 for word in words if word.lower() in educational_lemmas_lower)
+    social_count = sum(1 for word in words if word.lower() in social_lemmas_lower)
+    technological_count = sum(1 for word in words if word.lower() in technical_lemmas_lower)
 
     total_words = len(words)
 
@@ -49,7 +53,10 @@ def analyze_text(text):
     social_score = social_count / total_words
     technological_score = technological_count / total_words
 
-    return educational_score, social_score, technological_score
+    # Generate modified text with recommendations
+    modified_text = f"Original Text:\n{text}\n\nRecommendations:\nPrint Recommendations."
+
+    return educational_score, social_score, technological_score, modified_text
 
 @app.route('/')
 def index():
@@ -59,13 +66,15 @@ def index():
 def analyze():
     text_to_analyze = request.form['text']
     
-    educational_score, social_score, technological_score = analyze_text(text_to_analyze)
+    educational_score, social_score, technological_score, modified_text = analyze_text(text_to_analyze)
 
     return render_template('result.html', text=text_to_analyze, edu_score=educational_score,
-                            social_score=social_score, tech_score=technological_score)
+                            social_score=social_score, tech_score=technological_score,
+                            modified_text=modified_text)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=True)
+
 
 
 

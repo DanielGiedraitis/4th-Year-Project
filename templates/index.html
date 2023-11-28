@@ -10,6 +10,11 @@
     <div class="d-flex flex-column justify-content-center w-100 h-100">
         <div class="container">
             <h1>Diversity in Computing</h1>
+            <!-- Logout button/image with text -->
+            <a href="/logout" class="logout">
+                <img src="{{ url_for('static', filename='logout.png') }}" alt="Logout">
+                <span>Sign out</span>
+            </a>
             <form action="/analyze" method="post">
                 <textarea name="text" placeholder="Enter Description to analyse"></textarea>
                 <button type="submit">Analyze</button>
@@ -18,4 +23,6 @@
     </div>
 </body>
 </html>
+
+
 

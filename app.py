@@ -14,7 +14,7 @@ nltk.download('stopwords')
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Gied@localhost/DiversityDB'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'your_secret_key'  # Change this to a secret key
+app.config['SECRET_KEY'] = 'your_secret_key'  # Change to different secret key
 
 db = SQLAlchemy(app)
 
@@ -95,8 +95,6 @@ def login():
         return render_template('login.html', error=error)
 
     return render_template('login.html')
-
-
 
 
 @app.route('/register', methods=['GET', 'POST'])

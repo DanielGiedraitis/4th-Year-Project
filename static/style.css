@@ -14,8 +14,8 @@ body {
     width: 100%;
 }
 
-h1 {
-    color: #000000
+h1, h2 {
+    color: #000000;
 }
 
 form {
@@ -24,13 +24,37 @@ form {
 
 textarea {
     width: 100%;
-    height: 100px;
+    height: 300px; /* Increased height */
 }
 
 .result-container {
     text-align: center;
-    max-width: 900px; 
+    max-width: 1400px; 
     margin: 0 auto; 
+}
+
+.description-container,
+.recommendations-container {
+    width: 48%; /* Adjusted width */
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 20px 0;
+    border: 2px solid #000;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.description-container {
+    float: left; /* Aligned to the left */
+}
+
+.recommendations-container {
+    float: right; /* Aligned to the right */
+}
+
+.description-container h2,
+.recommendations-container h2 {
+    margin-bottom: 10px;
 }
 
 @keyframes gradient {
@@ -69,8 +93,4 @@ textarea {
     text-decoration: none; /* Remove underline */
     font-weight: bold;
 }
-
-
-
-
 

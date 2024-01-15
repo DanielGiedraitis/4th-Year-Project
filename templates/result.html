@@ -9,13 +9,28 @@
 <body>
     <div class="container result-container">
         <h1>Analysis Result</h1>
-        <p>Educational Score: {{ edu_score }}%</p>
-        <p>Social Score: {{ social_score }}%</p>
-        <p>Technological Score: {{ tech_score }}%</p>
-        <br>
-        <h1>Recommended Modifications:</h1>
-        <textarea readonly>{{ modified_text }}</textarea>
+
+        <!-- Container for the current description -->
+        <div class="description-container">
+            <h2>Current Description</h2>
+            <p>Educational Score: {{ edu_score }}%</p>
+            <p>Social Score: {{ social_score }}%</p>
+            <p>Technological Score: {{ tech_score }}%</p>
+            <textarea readonly>{{ text }}</textarea>
+        </div>
+
+        <!-- Container for the recommendations -->
+        <div class="recommendations-container">
+            <h2>Recommended Modifications</h2>
+            <p>Educational Score: {{ edu_score_recommendation }}%</p>
+            <p>Social Score: {{ social_score_recommendation }}%</p>
+            <p>Technological Score: {{ tech_score_recommendation }}%</p>
+            <textarea readonly>{{ modified_text }}</textarea>
+        </div>
+
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <a href="/">Back to Home</a>
     </div>
 </body>
 </html>
+

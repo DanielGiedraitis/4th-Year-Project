@@ -63,9 +63,9 @@ def analyze_text(text):
 
     total_words = len(words)
 
-    educational_score = educational_count / total_words
-    social_score = social_count / total_words
-    technological_score = technological_count / total_words
+    educational_score = round((educational_count / total_words) * 100, 2)
+    social_score = round((social_count / total_words) * 100, 2)
+    technological_score = round((technological_count / total_words) * 100, 2)
 
     modified_text = f"Original Text:\n{text}\n\nRecommendations:\nPrint Recommendations."
 

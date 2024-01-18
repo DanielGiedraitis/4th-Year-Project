@@ -7,6 +7,8 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 import openpyxl
+from openai import OpenAI
+import os
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -14,9 +16,15 @@ nltk.download('stopwords')
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Gied@localhost/DiversityDB'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'your_secret_key'  # Change to different secret key
+app.config['SECRET_KEY'] = 'secret_key'  
 
 db = SQLAlchemy(app)
+
+# Set OpenAI API key using an environment variable
+os.environ["OPENAI_API_KEY"] = ''
+
+# Initialize OpenAI client
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 
 class User(db.Model):
@@ -67,9 +75,53 @@ def analyze_text(text):
     social_score = round((social_count / total_words) * 100, 2)
     technological_score = round((technological_count / total_words) * 100, 2)
 
-    modified_text = f"Original Text:\n{text}\n\nRecommendations:\nPrint Recommendations."
+    modified_text = f"Print Recommendations."
 
     return educational_score, social_score, technological_score, modified_text
+
+
+def modify_text_social(text):
+    # Implement logic to modify the description to be more social
+    return "Modified social description"
+
+def modify_text_technical(text):
+    # Implement logic to modify the description to be more technical
+    return "Modified technical description"
+
+def modify_text_educational(text):
+    # Implement logic to modify the description to be more educational
+    return "Modified educational description"
+
+
+@app.route('/modify_description', methods=['POST'])
+def modify_description():
+    text_to_modify = request.form['text']
+    modification_type = request.form['modification_type']
+
+    # Analyze the text to get scores
+    educational_score, social_score, technological_score, _ = analyze_text(text_to_modify)
+
+    max_tokens_limit = 800
+
+    # API request to OpenAI for description modification
+    try:
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": text_to_modify},
+                {"role": "assistant", "content": f"Make the description more {modification_type}. Educational score: {educational_score}, Social score: {social_score}, Technical score: {technological_score}."},
+            ],
+            max_tokens=max_tokens_limit,
+        )
+        
+        # Access the assistant's reply from 'choices' key
+        modified_text = response.choices[0].message.content
+    except Exception as e:
+        # Handle errors
+        modified_text = f"Error: {str(e)}"
+
+    return modified_text
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -143,6 +195,8 @@ def analyze():
 if __name__ == '__main__':
     db.create_all()
     app.run(debug=True, use_reloader=True)
+
+
 
 
 

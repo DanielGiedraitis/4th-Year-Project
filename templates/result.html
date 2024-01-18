@@ -17,20 +17,49 @@
             <p>Social Score: {{ social_score }}%</p>
             <p>Technological Score: {{ tech_score }}%</p>
             <textarea readonly>{{ text }}</textarea>
+
+            <!-- Buttons for more modifications -->
+            <button onclick="modifyDescription('social')">More Social</button>
+            <button onclick="modifyDescription('technical')">More Technical</button>
+            <button onclick="modifyDescription('educational')">More Educational</button>
         </div>
 
         <!-- Container for the recommendations -->
         <div class="recommendations-container">
             <h2>Recommended Modifications</h2>
-            <p>Educational Score: {{ edu_score_recommendation }}%</p>
-            <p>Social Score: {{ social_score_recommendation }}%</p>
-            <p>Technological Score: {{ tech_score_recommendation }}%</p>
-            <textarea readonly>{{ modified_text }}</textarea>
+            <textarea id="modified_text" readonly>{{ modified_text }}</textarea>
         </div>
 
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <a href="/">Back to Home</a>
     </div>
+
+    <script>
+        function modifyDescription(modificationType) {
+            var textToModify = document.querySelector('textarea').value;
+
+            // AJAX request to the modify_description route
+            fetch('/modify_description', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    'text': textToModify,
+                    'modification_type': modificationType
+                }),
+            })
+            .then(response => response.text())
+            .then(data => {
+                // Update the modified_text area with the result
+                document.querySelector('#modified_text').value = data;
+            });
+        }
+    </script>
 </body>
 </html>
+
+
+
+
 

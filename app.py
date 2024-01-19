@@ -21,7 +21,7 @@ app.config['SECRET_KEY'] = 'secret_key'
 db = SQLAlchemy(app)
 
 # Set OpenAI API key using an environment variable
-os.environ["OPENAI_API_KEY"] = ''
+os.environ["OPENAI_API_KEY"] = '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'
 
 # Initialize OpenAI client
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
@@ -101,7 +101,31 @@ def modify_description():
     # Analyze the text to get scores
     educational_score, social_score, technological_score, _ = analyze_text(text_to_modify)
 
-    max_tokens_limit = 800
+    max_tokens_limit = 900
+
+    # Define the minimum number of words to use based on the modification type
+    min_words_to_use = {
+        'educational': 25,
+        'social': 7,
+        'technical': 25,
+    }
+
+    # Retrieve the corresponding lemma set based on the modification type
+    lemmas_set = {
+        'educational': educational_lemmas,
+        'social': social_lemmas,
+        'technical': technical_lemmas,
+    }.get(modification_type, set())
+
+    # Extract a subset of lemmas to be used in the modification
+    lemmas_to_use = list(lemmas_set)[:min(min_words_to_use[modification_type], len(lemmas_set))]
+
+    # Construct the assistant message content with lemmas
+    assistant_message = f"Make the description more {modification_type}. " \
+                        f"Educational score: {educational_score}, " \
+                        f"Social score: {social_score}, " \
+                        f"Technical score: {technological_score}. " \
+                        f"Use the following lemmas: {', '.join(lemmas_to_use)}."
 
     # API request to OpenAI for description modification
     try:
@@ -110,11 +134,11 @@ def modify_description():
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": text_to_modify},
-                {"role": "assistant", "content": f"Make the description more {modification_type}. Educational score: {educational_score}, Social score: {social_score}, Technical score: {technological_score}."},
+                {"role": "assistant", "content": assistant_message},
             ],
             max_tokens=max_tokens_limit,
         )
-        
+
         # Access the assistant's reply from 'choices' key
         modified_text = response.choices[0].message.content
     except Exception as e:
@@ -122,6 +146,7 @@ def modify_description():
         modified_text = f"Error: {str(e)}"
 
     return modified_text
+
 
 
 @app.route('/login', methods=['POST', 'GET'])

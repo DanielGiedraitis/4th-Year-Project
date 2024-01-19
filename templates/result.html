@@ -19,18 +19,23 @@
             <textarea readonly>{{ text }}</textarea>
 
             <!-- Buttons for more modifications -->
-            <button onclick="modifyDescription('social')">More Social</button>
-            <button onclick="modifyDescription('technical')">More Technical</button>
-            <button onclick="modifyDescription('educational')">More Educational</button>
+            <button class="modify-button" onclick="modifyDescription('social')">More Social</button>
+            <button class="modify-button" onclick="modifyDescription('technical')">More Technical</button>
+            <button class="modify-button" onclick="modifyDescription('educational')">More Educational</button>
+
         </div>
 
         <!-- Container for the recommendations -->
         <div class="recommendations-container">
             <h2>Recommended Modifications</h2>
+            <!-- Display the scores under Recommended Modifications heading -->
+            <p>Educational Score: {{ edu_score }}%</p>
+            <p>Social Score: {{ social_score }}%</p>
+            <p>Technological Score: {{ tech_score }}%</p>
             <textarea id="modified_text" readonly>{{ modified_text }}</textarea>
         </div>
 
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <a href="/">Back to Home</a>
     </div>
 
@@ -58,6 +63,8 @@
     </script>
 </body>
 </html>
+
+
 
 
 

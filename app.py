@@ -21,7 +21,7 @@ app.config['SECRET_KEY'] = 'secret_key'
 db = SQLAlchemy(app)
 
 # Set OpenAI API key using an environment variable
-os.environ["OPENAI_API_KEY"] = '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'
+os.environ["OPENAI_API_KEY"] = ''
 
 # Initialize OpenAI client
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))

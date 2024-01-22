@@ -29,13 +29,13 @@
         <div class="recommendations-container">
             <h2>Recommended Modifications</h2>
             <!-- Display the scores under Recommended Modifications heading -->
-            <p>Educational Score: {{ edu_score }}%</p>
-            <p>Social Score: {{ social_score }}%</p>
-            <p>Technological Score: {{ tech_score }}%</p>
+            <p>Educational Score: <span id="edu_score">0%</span></p>
+            <p>Social Score: <span id="social_score">0%</span></p>
+            <p>Technological Score: <span id="tech_score">0%</span></p>
             <textarea id="modified_text" readonly>{{ modified_text }}</textarea>
         </div>
 
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         <a href="/">Back to Home</a>
     </div>
 
@@ -54,15 +54,20 @@
                     'modification_type': modificationType
                 }),
             })
-            .then(response => response.text())
+            .then(response => response.json())
             .then(data => {
-                // Update the modified_text area with the result
-                document.querySelector('#modified_text').value = data;
+                // Update the modified text area with the result
+                document.querySelector('#modified_text').value = data.modified_text;
+                // Update the scores
+                document.querySelector('#edu_score').innerText = data.edu_score + '%';
+                document.querySelector('#social_score').innerText = data.social_score + '%';
+                document.querySelector('#tech_score').innerText = data.tech_score + '%';
             });
         }
     </script>
 </body>
 </html>
+
 
 
 

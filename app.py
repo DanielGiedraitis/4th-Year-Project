@@ -101,7 +101,7 @@ def modify_description():
     # Analyze the text to get scores
     educational_score, social_score, technological_score, _ = analyze_text(text_to_modify)
 
-    max_tokens_limit = 900
+    max_tokens_limit = 1500
 
     # The minimum number of words to use based on the modification type
     min_words_to_use = {

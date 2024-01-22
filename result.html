@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Analysis Result - Diversity in Computing</title>
+</head>
+<body>
+    <div class="container result-container">
+        <h1>Analysis Result</h1>
+
+        <!-- Container for the current description -->
+        <div class="description-container">
+            <h2>Current Description</h2>
+            <p>Educational Score: {{ edu_score }}%</p>
+            <p>Social Score: {{ social_score }}%</p>
+            <p>Technological Score: {{ tech_score }}%</p>
+            <textarea readonly>{{ text }}</textarea>
+
+            <!-- Buttons for more modifications -->
+            <button class="modify-button" onclick="modifyDescription('social')">More Social</button>
+            <button class="modify-button" onclick="modifyDescription('technical')">More Technical</button>
+            <button class="modify-button" onclick="modifyDescription('educational')">More Educational</button>
+
+        </div>
+
+        <!-- Container for the recommendations -->
+        <div class="recommendations-container">
+            <h2>Recommended Modifications</h2>
+            <!-- Display the scores under Recommended Modifications heading -->
+            <p>Educational Score: <span id="edu_score">0%</span></p>
+            <p>Social Score: <span id="social_score">0%</span></p>
+            <p>Technological Score: <span id="tech_score">0%</span></p>
+            <textarea id="modified_text" readonly>{{ modified_text }}</textarea>
+        </div>
+
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <a href="/">Back to Home</a>
+    </div>
+
+    <script>
+        function modifyDescription(modificationType) {
+            var textToModify = document.querySelector('textarea').value;
+
+            // AJAX request to the modify_description route
+            fetch('/modify_description', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    'text': textToModify,
+                    'modification_type': modificationType
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update the modified text area with the result
+                document.querySelector('#modified_text').value = data.modified_text;
+                // Update the scores
+                document.querySelector('#edu_score').innerText = data.edu_score + '%';
+                document.querySelector('#social_score').innerText = data.social_score + '%';
+                document.querySelector('#tech_score').innerText = data.tech_score + '%';
+            });
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+

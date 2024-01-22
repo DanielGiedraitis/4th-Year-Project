@@ -103,7 +103,7 @@ def modify_description():
 
     max_tokens_limit = 900
 
-    # Define the minimum number of words to use based on the modification type
+    # The minimum number of words to use based on the modification type
     min_words_to_use = {
         'educational': 25,
         'social': 7,
@@ -122,9 +122,9 @@ def modify_description():
 
     # Construct the assistant message content with lemmas
     assistant_message = f"Make the description more {modification_type}. " \
-                        f"Educational score: {educational_score}, " \
-                        f"Social score: {social_score}, " \
-                        f"Technical score: {technological_score}. " \
+                        f"Educational score: {educational_score}%, " \
+                        f"Social score: {social_score}%, " \
+                        f"Technical score: {technological_score}%. " \
                         f"Use the following lemmas: {', '.join(lemmas_to_use)}."
 
     # API request to OpenAI for description modification
@@ -141,12 +141,20 @@ def modify_description():
 
         # Access the assistant's reply from 'choices' key
         modified_text = response.choices[0].message.content
+
+        # Reanalyze the modified text to get updated scores
+        educational_score, social_score, technological_score, _ = analyze_text(modified_text)
+
     except Exception as e:
         # Handle errors
         modified_text = f"Error: {str(e)}"
 
-    return modified_text
-
+    return {
+        'modified_text': modified_text,
+        'edu_score': educational_score,
+        'social_score': social_score,
+        'tech_score': technological_score
+    }
 
 
 @app.route('/login', methods=['POST', 'GET'])

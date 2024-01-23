@@ -103,13 +103,6 @@ def modify_description():
 
     max_tokens_limit = 1500
 
-    # The minimum number of words to use based on the modification type
-    min_words_to_use = {
-        'educational': 25,
-        'social': 7,
-        'technical': 25,
-    }
-
     # Retrieve the corresponding lemma set based on the modification type
     lemmas_set = {
         'educational': educational_lemmas,
@@ -118,7 +111,7 @@ def modify_description():
     }.get(modification_type, set())
 
     # Extract a subset of lemmas to be used in the modification
-    lemmas_to_use = list(lemmas_set)[:min(min_words_to_use[modification_type], len(lemmas_set))]
+    lemmas_to_use = list(lemmas_set)
 
     # Construct the assistant message content with lemmas
     assistant_message = f"Make the description more {modification_type}. " \

@@ -10,11 +10,15 @@ class CourseSpider(scrapy.Spider):
         for course_link in course_links:
             institution = course_link.css('td:nth-child(1) a::text').get()
             level = course_link.css('td:nth-child(2) p::text').get()
-            course_titles = course_link.css('td:nth-child(3) p a::text').getall()
-            for course_title in course_titles:
+            course_title_links = course_link.css('td:nth-child(3) p a')
+            for course_title_link in course_title_links:
+                course_title = course_title_link.css('::text').get().strip()
+                course_link = course_title_link.css('::attr(href)').get()
                 yield {
                     'institution': institution.strip(),
                     'level': level.strip(),
-                    'course_title': course_title.strip()
+                    'course_title': course_title,
+                    'course_link': course_link
                 }
+
 

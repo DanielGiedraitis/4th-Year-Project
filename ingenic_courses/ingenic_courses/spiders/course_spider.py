@@ -33,7 +33,11 @@ class CourseSpider(scrapy.Spider):
             description = response.css('.overview-full-section.flex-container p::text, .course-structure-full-section.flex-container p::text, .field--name-field-prospectus-about a::attr(href)').getall()
             description = [desc.strip() for desc in description if desc.strip()] # Remove empty strings and strip whitespace
             course_content = response.css('ADD CSS SELECOR ::text').getall()
-
+        elif institution.strip() == 'Dublin City University':
+            description = response.css('.overview-full-section.flex-container p::text').getall()
+            description = [desc.strip() for desc in description if desc.strip()]
+            course_content = response.css('.course-structure-full-section.flex-container ::text, .course-structure-full-section.flex-container a::attr(href)').getall()
+            course_content = [course.strip() for course in course_content if course.strip()] 
 
         description = ' '.join(description).strip()
         yield {

@@ -28,6 +28,7 @@ class CourseSpider(scrapy.Spider):
         institution = response.meta['institution']
         level = response.meta['level']
         course_title = response.meta['course_title']
+        
         # Extract description based on institution
         if institution.strip() == 'Trinity College Dublin':
             description = response.css('.overview-full-section.flex-container p::text, .course-structure-full-section.flex-container p::text, .field--name-field-prospectus-about a::attr(href)').getall()
@@ -38,6 +39,20 @@ class CourseSpider(scrapy.Spider):
             description = [desc.strip() for desc in description if desc.strip()]
             course_content = response.css('.course-structure-full-section.flex-container ::text, .course-structure-full-section.flex-container a::attr(href)').getall()
             course_content = [course.strip() for course in course_content if course.strip()] 
+        elif institution.strip() == 'Dun Laoghaire Institute Of Art Design and Technology':
+            if course_title.strip() == 'BSc in Creative Computing':
+                description = response.css('div.intro::text, div.content-block.text-wrapper.wys-block h2:contains("What will I do?") + ul li::text').getall()
+                description = [desc.strip() for desc in description if desc.strip()]
+            elif course_title.strip() == 'BSc in Creative Media Technologies':
+                description = response.css('.content-block.text-wrapper.wys-block p::text').getall()
+                description = [desc.strip() for desc in description if desc.strip()]
+
+            # Extract headings and module details
+            headings = response.css('.content-block.expander-block.accordion.faq.list-faq.panel-group .item-faq.panel .question.panel-title a::text').getall()
+            module_details = response.css('.content-block.expander-block.accordion.faq.list-faq.panel-group .item-faq.panel .panel-body p::text').getall()
+            course_content = [f"{headings[i]}: {module_details[i]}" for i in range(len(headings))]
+            course_content = [course.strip() for course in course_content if course.strip()] 
+
 
         description = ' '.join(description).strip()
         yield {

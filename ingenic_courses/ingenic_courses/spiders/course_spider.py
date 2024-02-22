@@ -4,9 +4,9 @@ class CourseSpider(scrapy.Spider):
     name = 'courses'
     start_urls = ['https://ingenic.ie/?page_id=384']
 
-    # custom_settings = {
-    #     'DOWNLOAD_DELAY': 2  
-    # }
+    custom_settings = {
+        'DOWNLOAD_DELAY': 2  
+    }
 
     def parse(self, response):
         # Extract course links
@@ -52,8 +52,12 @@ class CourseSpider(scrapy.Spider):
             module_details = response.css('.content-block.expander-block.accordion.faq.list-faq.panel-group .item-faq.panel .panel-body p::text').getall()
             course_content = [f"{headings[i]}: {module_details[i]}" for i in range(len(headings))]
             course_content = [course.strip() for course in course_content if course.strip()] 
-
-
+        elif institution.strip() == 'University College Dublin':
+            description = response.css('div.row.queries div.col-xs-12.col-md-8.content p::text, div.row.queries div.col-xs-12.col-md-8.content p a::attr(href)').getall()
+            description = [desc.strip() for desc in description if desc.strip()]
+            course_content = response.css('ADD CSS SELECOR ::text').getall()
+            course_content = [course.strip() for course in course_content if course.strip()] 
+            
         description = ' '.join(description).strip()
         yield {
             'institution': institution,

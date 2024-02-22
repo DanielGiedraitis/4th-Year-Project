@@ -92,6 +92,18 @@ class CourseSpider(scrapy.Spider):
             description = [desc.strip() for desc in description if desc.strip()]
             course_content = response.css('ADD CSS SELECOR ::text').getall()
 
+        # University College Cork
+        elif institution.strip() == 'University College Cork':
+            description = response.css('ADD CSS SELECOR ::text').getall()
+            description = [desc.strip() for desc in description if desc.strip()]
+            course_content = response.css('ADD CSS SELECOR ::text').getall()
+
+        # NUI Galway
+        elif institution.strip() == 'NUI Galway':
+            description = response.css('.tabsBody #course_overview p::text, .tabsBody #course_overview p a::attr(href)').getall()
+            description = [desc.strip() for desc in description if desc.strip()]
+            course_content = response.css('ADD CSS SELECOR ::text').getall()
+
         description = ' '.join(description).strip()
         yield {
             'institution': institution,

@@ -79,6 +79,13 @@ class CourseSpider(scrapy.Spider):
             description = [desc.strip() for desc in description if desc.strip()]
             course_content = response.css('ADD CSS SELECOR ::text').getall()
 
+        # Technological University Dublin - Blanchardstown Campus
+        elif institution.strip() == 'Technological University Dublin - Blanchardstown Campus':
+            description = response.css('.content-accordion__item #content-accordion__item1 .well.copy p::text').getall() + \
+                          response.css('.content-accordion__item #content-accordion__item2 .well.copy p::text').getall()
+            description = [desc.strip() for desc in description if desc.strip()]
+            course_content = response.css('ADD CSS SELECOR ::text').getall()
+
         description = ' '.join(description).strip()
         yield {
             'institution': institution,

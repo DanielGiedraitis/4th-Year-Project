@@ -110,6 +110,17 @@ class CourseSpider(scrapy.Spider):
             description = [desc.strip() for desc in description if desc.strip()]
             course_content = response.css('ADD CSS SELECOR ::text').getall()
 
+        # Maynooth University
+        elif institution.strip() == 'Maynooth University':
+            if level.strip() == 'Undergrad':
+                description = response.css('#content-tab__description ::text, #content-tab__description a::attr(href)').getall()
+                description = [desc.strip() for desc in description if desc.strip()]
+            elif level.strip() == 'Postgrad':
+                description = response.css('#content-tab__overview ::text, #content-tab__overview a::attr(href), #content-tab__structure ::text, #content-tab__structure a::attr(href)').getall()
+                description = [desc.strip() for desc in description if desc.strip()]
+
+            course_content = response.css('ADD CSS SELECOR ::text').getall()
+
         description = ' '.join(description).strip()
         yield {
             'institution': institution,

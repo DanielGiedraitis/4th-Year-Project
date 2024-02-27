@@ -121,6 +121,25 @@ class CourseSpider(scrapy.Spider):
 
             course_content = response.css('ADD CSS SELECOR ::text').getall()
 
+        # Munster Technological University - Cork Campus
+        elif institution.strip() == 'Munster Technological University - Cork':
+            description = response.css('').getall()
+            description = [desc.strip() for desc in description if desc.strip()]
+            course_content = response.css('ADD CSS SELECOR ::text').getall()
+
+        # Munster Technological University - Kerry Campus
+        elif institution.strip() == 'Munster Technological University - Kerry Campus':
+            description = response.css('ADD CSS SELECOR ::text').getall()
+            description = [desc.strip() for desc in description if desc.strip()]
+            course_content = response.css('ADD CSS SELECOR ::text').getall()
+
+        # Dundalk Institute of Technology
+        elif institution.strip() == 'Dundalk Institute of Technology':
+            description = response.css('#tab-summary + div.panel-collapse div.panel-body *::text, #headingDescription + div.panel-collapse div.panel-body *::text').getall()
+            description = [desc.strip() for desc in description if desc.strip()]
+            course_content = response.css('#headingContent + div.panel-collapse div.panel-body *::text').getall()
+            course_content = [course.strip() for course in course_content if course.strip()]
+
         description = ' '.join(description).strip()
         yield {
             'institution': institution,

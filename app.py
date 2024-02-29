@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
@@ -9,6 +9,7 @@ from nltk.stem import PorterStemmer
 import openpyxl
 from openai import OpenAI
 import os
+import json
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -23,7 +24,7 @@ db = SQLAlchemy(app)
 # Set OpenAI API key using an environment variable
 os.environ["OPENAI_API_KEY"] = ''
 
-# Initialize OpenAI client
+# Initialise OpenAI client
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 
@@ -205,6 +206,13 @@ def index():
         return render_template('index.html')
     else:
         return redirect(url_for('login'))
+
+
+@app.route('/courses_json')
+def courses_json():
+    with open('ingenic_courses/courses.json', encoding='utf-8') as f:
+        courses = json.load(f)
+    return jsonify(courses)
 
 
 @app.route('/analyze', methods=['POST'])

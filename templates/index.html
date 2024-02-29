@@ -16,13 +16,103 @@
                 <span>Sign out</span>
             </a>
             <form action="/analyze" method="post">
-                <textarea name="text" placeholder="Enter Description to analyse"></textarea>
+                <select name="institution" id="institution">
+                    <option value="" disabled selected>Select Institution</option>
+                    <!-- Populate this dropdown dynamically -->
+                </select>
+                <select name="level" id="level" disabled>
+                    <option value="" disabled selected>Select Level</option>
+                    <option value="undergrad">Undergrad</option>
+                    <option value="postgrad">Postgrad</option>
+                </select>
+                <select name="course_title" id="course_title" disabled>
+                    <option value="" disabled selected>Select Course</option>
+                    <!-- Populate this dropdown dynamically -->
+                </select>
+                <textarea name="text" id="description" placeholder="Select or Enter Description to analyse" readonly></textarea>
                 <button type="submit">Analyse</button>
             </form>
         </div>
     </div>
+
+    <script>
+        const institutionDropdown = document.getElementById('institution');
+        const levelDropdown = document.getElementById('level');
+        const courseDropdown = document.getElementById('course_title');
+        const descriptionTextarea = document.getElementById('description');
+
+        // Function to fetch courses and populate dropdowns
+        async function populateDropdowns() {
+            const response = await fetch('/courses_json');
+            const courses = await response.json();
+
+            // Populate institution dropdown
+            institutionDropdown.innerHTML = '<option value="" disabled selected>Select Institution</option>';
+            const institutions = Array.from(new Set(courses.map(course => course.institution)));
+            institutions.forEach(institution => {
+                institutionDropdown.innerHTML += `<option value="${institution}">${institution}</option>`;
+            });
+
+            // Event listener for institution dropdown change
+            institutionDropdown.addEventListener('change', () => {
+                const selectedInstitution = institutionDropdown.value;
+
+                // Clear level dropdown and reset its state
+                levelDropdown.innerHTML = '<option value="" disabled selected>Select Level</option>';
+                levelDropdown.disabled = true;
+
+                // Clear course dropdown and reset its state
+                courseDropdown.innerHTML = '<option value="" disabled selected>Select Course</option>';
+                courseDropdown.disabled = true;
+
+                // Reset description textarea
+                descriptionTextarea.value = '';
+                descriptionTextarea.setAttribute('placeholder', 'Select or Enter Description to analyse');
+
+                // Populate levels for the selected institution
+                const levels = Array.from(new Set(courses.filter(course => course.institution === selectedInstitution).map(course => course.level)));
+                levels.forEach(level => {
+                    levelDropdown.innerHTML += `<option value="${level}">${level.charAt(0).toUpperCase() + level.slice(1)}</option>`;
+                });
+                levelDropdown.disabled = false;
+            });
+
+            // Event listener for level dropdown change
+            levelDropdown.addEventListener('change', () => {
+                const selectedInstitution = institutionDropdown.value;
+                const selectedLevel = levelDropdown.value;
+
+                // Clear course dropdown and reset its state
+                courseDropdown.innerHTML = '<option value="" disabled selected>Select Course</option>';
+                courseDropdown.disabled = true;
+
+                // Reset description textarea
+                descriptionTextarea.value = '';
+                descriptionTextarea.setAttribute('placeholder', 'Description');
+
+                // Populate courses for the selected institution and level
+                const coursesForLevel = courses.filter(course => course.institution === selectedInstitution && course.level === selectedLevel);
+                coursesForLevel.forEach(course => {
+                    courseDropdown.innerHTML += `<option value="${course.course_title}">${course.course_title}</option>`;
+                });
+                courseDropdown.disabled = false;
+            });
+
+            // Event listener for course dropdown change
+            courseDropdown.addEventListener('change', () => {
+                const selectedCourse = courseDropdown.value;
+                const selectedCourseDescription = courses.find(course => course.course_title === selectedCourse).description;
+                descriptionTextarea.value = selectedCourseDescription;
+            });
+        }
+
+        // Call the function to populate dropdowns
+        populateDropdowns();
+    </script>
 </body>
 </html>
+
+
 
 
 

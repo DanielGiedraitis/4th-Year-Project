@@ -256,6 +256,21 @@ body.register-page form button {
 }
 
 
+/* CSS for dropdowns in index.html */
+.dropdown-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dropdown-container select {
+    width: 250px; 
+}
+
+#description {
+    width: 764px; 
+}
+
 
 
 

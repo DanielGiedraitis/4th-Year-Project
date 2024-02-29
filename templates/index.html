@@ -16,20 +16,24 @@
                 <span>Sign out</span>
             </a>
             <form action="/analyze" method="post">
-                <select name="institution" id="institution">
-                    <option value="" disabled selected>Select Institution</option>
-                    <!-- Populate this dropdown dynamically -->
-                </select>
-                <select name="level" id="level" disabled>
-                    <option value="" disabled selected>Select Level</option>
-                    <option value="undergrad">Undergrad</option>
-                    <option value="postgrad">Postgrad</option>
-                </select>
-                <select name="course_title" id="course_title" disabled>
-                    <option value="" disabled selected>Select Course</option>
-                    <!-- Populate this dropdown dynamically -->
-                </select>
-                <textarea name="text" id="description" placeholder="Select or Enter Description to analyse" readonly></textarea>
+                <!-- Dropdowns container -->
+                <div class="dropdown-container">
+                    <select name="institution" id="institution">
+                        <option value="" disabled selected>Select Institution</option>
+                        <!-- Populate this dropdown dynamically -->
+                    </select>
+                    <select name="level" id="level" disabled>
+                        <option value="" disabled selected>Select Level</option>
+                        <option value="undergrad">Undergrad</option>
+                        <option value="postgrad">Postgrad</option>
+                    </select>
+                    <select name="course_title" id="course_title" disabled>
+                        <option value="" disabled selected>Select Course</option>
+                        <!-- Populate this dropdown dynamically -->
+                    </select>
+                </div>
+                <!-- Text area for description -->
+                <textarea name="text" id="description" placeholder="Description" readonly></textarea>
                 <button type="submit">Analyse</button>
             </form>
         </div>
@@ -41,7 +45,7 @@
         const courseDropdown = document.getElementById('course_title');
         const descriptionTextarea = document.getElementById('description');
 
-        // Function to fetch courses and populate dropdowns
+        // Function to fetch courses JSON and populate dropdowns
         async function populateDropdowns() {
             const response = await fetch('/courses_json');
             const courses = await response.json();
@@ -67,7 +71,7 @@
 
                 // Reset description textarea
                 descriptionTextarea.value = '';
-                descriptionTextarea.setAttribute('placeholder', 'Select or Enter Description to analyse');
+                descriptionTextarea.setAttribute('placeholder', 'Description');
 
                 // Populate levels for the selected institution
                 const levels = Array.from(new Set(courses.filter(course => course.institution === selectedInstitution).map(course => course.level)));
@@ -111,6 +115,7 @@
     </script>
 </body>
 </html>
+
 
 
 

@@ -7,6 +7,20 @@
     <title>Analysis Result - Diversity in Computing</title>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <ul>
+            <li><a href="/" class="active">Home</a></li>
+            <!-- Add more navigation links as needed -->
+        </ul>
+        <div class="navbar-right">
+            <a href="/logout" class="logout">
+                <img src="{{ url_for('static', filename='logout.png') }}" alt="Logout">
+                <span>Sign out</span>
+            </a>
+        </div>
+    </div>
+
     <div class="container result-container">
         <h1>Analysis Result</h1>
 
@@ -39,9 +53,6 @@
             
             <textarea id="modified_text" readonly>{{ modified_text }}</textarea>
         </div>
-
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <a href="/">Back to Home</a>
     </div>
 
     <script>

@@ -137,7 +137,7 @@ class CourseSpider(scrapy.Spider):
         elif institution.strip() == 'Dundalk Institute of Technology':
             description = response.css('#tab-summary + div.panel-collapse div.panel-body *::text, #headingDescription + div.panel-collapse div.panel-body *::text').getall()
             description = [desc.strip() for desc in description if desc.strip()]
-            course_content = response.css('#headingContent + div.panel-collapse div.panel-body *::text').getall()
+            # course_content = response.css('#headingContent + div.panel-collapse div.panel-body *::text').getall()
             course_content = [course.strip() for course in course_content if course.strip()]
 
         description = ' '.join(description).strip()

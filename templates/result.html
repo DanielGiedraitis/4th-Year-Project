@@ -11,16 +11,15 @@
     <div class="navbar">
         <ul>
             <li><a href="/" class="active">Home</a></li>
-            <!-- Add more navigation links as needed -->
+            <li class="navbar-text navbar-text-center"><div class="navbar-text">Diversity in Computing</div></li>
+            <li class="navbar-right">
+                <a href="/logout" class="logout">
+                    <img src="{{ url_for('static', filename='logout.png') }}" alt="Logout">
+                    <span>Sign out</span>
+                </a>
+            </li>
         </ul>
-        <div class="navbar-right">
-            <a href="/logout" class="logout">
-                <img src="{{ url_for('static', filename='logout.png') }}" alt="Logout">
-                <span>Sign out</span>
-            </a>
-        </div>
     </div>
-
     <div class="container result-container">
         <h1>Analysis Result</h1>
 

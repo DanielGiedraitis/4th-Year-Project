@@ -271,7 +271,6 @@ body.register-page form button {
     width: 764px; 
 }
 
-
 /* Styles for the horizontal navbar */
 .navbar {
     position: fixed;
@@ -281,16 +280,21 @@ body.register-page form button {
     background-color: #383434; 
     padding: 20px 0; 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .navbar ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    align-items: center;
+    flex-grow: 1; 
 }
 
 .navbar ul li {
-    display: inline;
     margin-right: 20px; 
 }
 
@@ -304,6 +308,18 @@ body.register-page form button {
     font-weight: bold;
 }
 
+.navbar .navbar-text {
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.navbar .navbar-text-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .navbar ul li:first-child a {
     background-color: #08ac6c; 
     padding: 21px 20px; 
@@ -313,6 +329,9 @@ body.register-page form button {
     background-color: #ddd; 
     color: black;
 }
+
+
+
 
 
 

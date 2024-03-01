@@ -7,14 +7,22 @@
     <title>Diversity in Computing</title>
 </head>
 <body class="index-page">
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <ul>
+            <li><a href="/" class="active">Home</a></li>
+            <li class="navbar-text navbar-text-center"><div class="navbar-text">Diversity in Computing</div></li>
+            <li class="navbar-right">
+                <a href="/logout" class="logout">
+                    <img src="{{ url_for('static', filename='logout.png') }}" alt="Logout">
+                    <span>Sign out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
     <div class="d-flex flex-column justify-content-center w-100 h-100">
         <div class="container">
-            <h1>Diversity in Computing</h1>
-            <!-- Logout button/image with text -->
-            <a href="/logout" class="logout">
-                <img src="{{ url_for('static', filename='logout.png') }}" alt="Logout">
-                <span>Sign out</span>
-            </a>
+            <h1>Select or Enter a Course Description</h1>
             <form action="/analyze" method="post">
                 <!-- Dropdowns container -->
                 <div class="dropdown-container">

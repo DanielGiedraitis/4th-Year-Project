@@ -70,11 +70,15 @@ def analyze_text(text):
     social_count = sum(1 for word in words if word.lower() in social_lemmas_lower)
     technological_count = sum(1 for word in words if word.lower() in technical_lemmas_lower)
 
+    total_lemma_words = educational_count + social_count + technological_count
+
+    # Count total words in description
     total_words = len(words)
 
-    educational_score = round((educational_count / total_words) * 100, 2)
-    social_score = round((social_count / total_words) * 100, 2)
-    technological_score = round((technological_count / total_words) * 100, 2)
+    # Calculate scores based on the proportion of each category in the description
+    educational_score = round((educational_count / total_lemma_words) * 100, 2)
+    social_score = round((social_count / total_lemma_words) * 100, 2)
+    technological_score = round((technological_count / total_lemma_words) * 100, 2)
 
     modified_text = f"Print Recommendations."
 

@@ -82,7 +82,7 @@ def analyze_text(text):
 
     modified_text = f"Print Recommendations."
 
-    return educational_score, social_score, technological_score, modified_text
+    return educational_score, social_score, technological_score, modified_text, total_words
 
 
 def modify_text_social(text):
@@ -104,7 +104,7 @@ def modify_description():
     modification_type = request.form['modification_type']
 
     # Analyze the text to get scores
-    educational_score, social_score, technological_score, _ = analyze_text(text_to_modify)
+    educational_score, social_score, technological_score, _, total_words = analyze_text(text_to_modify)
 
     max_tokens_limit = 1500
 
@@ -141,7 +141,7 @@ def modify_description():
         modified_text = response.choices[0].message.content
 
         # Reanalyze the modified text to get updated scores
-        educational_score, social_score, technological_score, _ = analyze_text(modified_text)
+        educational_score, social_score, technological_score, _, total_words = analyze_text(modified_text)
 
     except Exception as e:
         # Handle errors
@@ -151,7 +151,8 @@ def modify_description():
         'modified_text': modified_text,
         'edu_score': educational_score,
         'social_score': social_score,
-        'tech_score': technological_score
+        'tech_score': technological_score,
+        'word_count': total_words
     }
 
 
@@ -223,11 +224,11 @@ def courses_json():
 def analyze():
     text_to_analyze = request.form['text']
 
-    educational_score, social_score, technological_score, modified_text = analyze_text(text_to_analyze)
+    educational_score, social_score, technological_score, modified_text, total_words = analyze_text(text_to_analyze)
 
     return render_template('result.html', text=text_to_analyze, edu_score=educational_score,
                            social_score=social_score, tech_score=technological_score,
-                           modified_text=modified_text)
+                           modified_text=modified_text, total_words=total_words)
 
 
 if __name__ == '__main__':

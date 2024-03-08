@@ -29,6 +29,7 @@
             <p>Educational Score: {{ edu_score }}%</p>
             <p>Social Score: {{ social_score }}%</p>
             <p>Technological Score: {{ tech_score }}%</p>
+            <p>Word Count: {{ total_words }}</p> <!-- Display the total word count here -->
             <textarea readonly>{{ text }}</textarea>
 
             <!-- Buttons for more modifications -->
@@ -44,6 +45,7 @@
             <p>Educational Score: <span id="edu_score">0%</span></p>
             <p>Social Score: <span id="social_score">0%</span></p>
             <p>Technological Score: <span id="tech_score">0%</span></p>
+            <p>Word Count: <span id="modified_word_count">0</span></p>
             
             <!-- Loading progress bar -->
             <div id="loading-container">
@@ -87,6 +89,11 @@
                 document.querySelector('#edu_score').innerText = data.edu_score + '%';
                 document.querySelector('#social_score').innerText = data.social_score + '%';
                 document.querySelector('#tech_score').innerText = data.tech_score + '%';
+                // Calculate and display word count for modified text
+                var modifiedWordCount = data.modified_text.split(/\s+/).filter(function(word) {
+                    return word.length > 0;
+                }).length;
+                document.querySelector('#modified_word_count').innerText = modifiedWordCount;
             })
             .catch(error => {
                 console.error('Error:', error);

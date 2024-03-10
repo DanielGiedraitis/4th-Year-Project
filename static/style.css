@@ -50,7 +50,7 @@ form button {
 
 .description-container {
     width: 48%; /* Adjusted width */
-    height: 560px;
+    height: 590px;
     box-sizing: border-box;
     padding: 20px;
     margin: 20px 0;
@@ -66,7 +66,7 @@ form button {
 
 .recommendations-container {
     width: 48%; /* Adjusted width */
-    height: 560px;
+    height: 590px;
     box-sizing: border-box;
     padding: 20px;
     margin: 20px 0;
@@ -330,6 +330,13 @@ body.register-page form button {
     color: black;
 }
 
+/* Styles for the Current/modified description */
+.scroll-box {
+    overflow-y: auto;
+    height: 300px; 
+    border: 1px solid #000000; /* Border for styling */
+    padding: 5px; /* Padding for better readability */
+}
 
 
 

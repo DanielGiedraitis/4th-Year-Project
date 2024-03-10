@@ -82,7 +82,7 @@ def analyze_text(text):
 
     modified_text = f"Print Recommendations."
 
-    return educational_score, social_score, technological_score, modified_text, total_words
+    return educational_score, social_score, technological_score, total_words, modified_text
 
 
 def modify_text_social(text):
@@ -224,26 +224,13 @@ def courses_json():
 def analyze():
     text_to_analyze = request.form['text']
 
-    educational_score, social_score, technological_score, modified_text, total_words = analyze_text(text_to_analyze)
+    educational_score, social_score, technological_score, total_words, modified_text = analyze_text(text_to_analyze)
 
     return render_template('result.html', text=text_to_analyze, edu_score=educational_score,
                            social_score=social_score, tech_score=technological_score,
-                           modified_text=modified_text, total_words=total_words)
+                           total_words=total_words, modified_text=modified_text)
 
 
 if __name__ == '__main__':
     db.create_all()
     app.run(debug=True, use_reloader=True)
-
-
-
-
-
-
-
-
-
-
-
-
-

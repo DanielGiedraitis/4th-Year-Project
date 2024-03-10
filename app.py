@@ -73,7 +73,7 @@ def analyze_text(text):
     total_lemma_words = educational_count + social_count + technological_count
 
     # Count total words in description
-    total_words = len(words)
+    total_words = len(text.split())
 
     # Calculate scores based on the proportion of each category in the description
     educational_score = round((educational_count / total_lemma_words) * 100, 2)

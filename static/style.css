@@ -356,6 +356,27 @@ body.register-page form button {
     font-weight: bold; 
 }
 
+/* Style for Score box colours */
+.score-box {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
+    border: 1px solid #000;
+}
+
+.educational-box {
+    background-color: blue; 
+}
+
+.social-box {
+    background-color: green; 
+}
+
+.technological-box {
+    background-color: red; 
+}
+
 
 
 

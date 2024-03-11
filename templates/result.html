@@ -97,7 +97,7 @@
                 document.getElementById('loading-container').style.display = 'none';
     
                 // Update the modified_text area with the result
-                document.getElementById('modified_text').innerText = data.modified_text;
+                document.getElementById('modified_text').innerHTML = data.modified_text;
                 // Update the scores
                 document.getElementById('edu_score').innerText = data.edu_score + '%';
                 document.getElementById('social_score').innerText = data.social_score + '%';

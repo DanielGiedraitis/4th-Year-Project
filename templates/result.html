@@ -30,7 +30,19 @@
             <p>Social Score: {{ social_score }}%</p>
             <p>Technological Score: {{ tech_score }}%</p>
             <p>Word Count: {{ total_words }}</p> <!-- Display the total word count here -->
-            <div id="current_description" class="scroll-box">{{ text }}</div>
+            <div id="current_description" class="scroll-box">
+                {% for word in original_text.split() %}
+                    {% if word.lower() in educational_words %}
+                        <span class="educational">{{ word }}</span>
+                    {% elif word.lower() in social_words %}
+                        <span class="social">{{ word }}</span>
+                    {% elif word.lower() in technological_words %}
+                        <span class="technological">{{ word }}</span>
+                    {% else %}
+                        {{ word }}
+                    {% endif %}
+                {% endfor %}
+            </div>                    
 
             <br>
             <!-- Buttons for more modifications -->

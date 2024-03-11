@@ -226,9 +226,15 @@ def analyze():
 
     educational_score, social_score, technological_score, total_words, modified_text = analyze_text(text_to_analyze)
 
-    return render_template('result.html', text=text_to_analyze, edu_score=educational_score,
-                           social_score=social_score, tech_score=technological_score,
-                           total_words=total_words, modified_text=modified_text)
+    # Get the lists of educational, social, and technological words
+    educational_words = list(educational_lemmas)
+    social_words = list(social_lemmas)
+    technological_words = list(technical_lemmas)
+
+    return render_template('result.html', original_text=text_to_analyze, modified_text=modified_text,
+                           edu_score=educational_score, social_score=social_score, tech_score=technological_score,
+                           total_words=total_words, educational_words=educational_words,
+                           social_words=social_words, technological_words=technological_words)
 
 
 if __name__ == '__main__':

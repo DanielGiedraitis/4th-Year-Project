@@ -59,10 +59,6 @@ form button {
     background-color: #fff;
 }
 
-.modify-button {
-    font-weight: bold;
-}
-
 
 .recommendations-container {
     width: 48%; /* Adjusted width */
@@ -377,6 +373,79 @@ body.register-page form button {
     background-color: red; 
 }
 
+/* Space between text box and buttons */
+.modify-button {
+    margin-top: 5px; 
+}
+
+/* Style for educational button */
+.educational-button {
+    background: blue;
+    border-radius: 999px;
+    box-shadow: blue 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: Helvetica;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 6px 12px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    word-break: break-word;
+    border: 0;
+  } 
+
+/* Style for social button */
+.social-button {
+    background: green;
+    border-radius: 999px;
+    box-shadow: green 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: Helvetica;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 6px 12px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    word-break: break-word;
+    border: 0;
+  } 
+
+/* Style for technical button */
+.technical-button {
+    background: red;
+    border-radius: 999px;
+    box-shadow: red 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: Helvetica;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 6px 12px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    word-break: break-word;
+    border: 0;
+  } 
 
 
 

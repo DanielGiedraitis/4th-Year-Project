@@ -143,12 +143,25 @@ def modify_description():
         # Reanalyze the modified text to get updated scores
         educational_score, social_score, technological_score, _, total_words = analyze_text(modified_text)
 
+        # Highlight technical, social, and educational words in the modified text
+        modified_text_with_highlights = ""
+        for word in modified_text.split():
+            clean_word = word.strip('.:,')
+            if clean_word.lower() in educational_lemmas:
+                modified_text_with_highlights += f"<span class='educational'>{word}</span> "
+            elif clean_word.lower() in social_lemmas:
+                modified_text_with_highlights += f"<span class='social'>{word}</span> "
+            elif clean_word.lower() in technical_lemmas:
+                modified_text_with_highlights += f"<span class='technological'>{word}</span> "
+            else:
+                modified_text_with_highlights += f"{word} "
+
     except Exception as e:
         # Handle errors
-        modified_text = f"Error: {str(e)}"
+        modified_text_with_highlights = f"Error: {str(e)}"
 
     return {
-        'modified_text': modified_text,
+        'modified_text': modified_text_with_highlights,
         'edu_score': educational_score,
         'social_score': social_score,
         'tech_score': technological_score,

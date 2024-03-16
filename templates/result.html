@@ -26,9 +26,9 @@
         <!-- Container for the current description -->
         <div class="description-container">
             <h2>Current Description</h2>
-            <p>Educational Score: {{ edu_score }}% <span class="score-box educational-box"></span></p>
-            <p>Social Score: {{ social_score }}% <span class="score-box social-box"></span></p>
-            <p>Technological Score: {{ tech_score }}% <span class="score-box technological-box"></span></p>
+            <p>Educational Score: {{ edu_score }}% <span class="score-box educational-box"></span> ({{ edu_count }} educational words)</p>
+            <p>Social Score: {{ social_score }}% <span class="score-box social-box"></span> ({{ social_count }} social words)</p>
+            <p>Technological Score: {{ tech_score }}% <span class="score-box technological-box"></span> ({{ tech_count }} technical words)</p>
             <p>Word Count: {{ total_words }}</p> <!-- Display the total word count here -->
             <div id="current_description" class="scroll-box">
                 {% for word in original_text.split() %}
@@ -55,9 +55,12 @@
         <div class="recommendations-container">
             <h2>Recommended Modifications</h2>
             <!-- Display the scores under Recommended Modifications heading -->
-            <p>Educational Score: <span id="edu_score">0%</span> <span class="score-box educational-box"></span></p>
-            <p>Social Score: <span id="social_score">0%</span> <span class="score-box social-box"></span></p>
-            <p>Technological Score: <span id="tech_score">0%</span> <span class="score-box technological-box"></span></p>
+            <p>Educational Score: <span id="edu_score">0%</span> <span class="score-box educational-box"></span>
+                (<span id="edu_count">0</span> educational words)</p>
+            <p>Social Score: <span id="social_score">0%</span> <span class="score-box social-box"></span>
+                (<span id="social_count">0</span> social words)</p>
+            <p>Technological Score: <span id="tech_score">0%</span> <span class="score-box technological-box"></span>
+                (<span id="tech_count">0</span> technical words)</p>            
             <p>Word Count: <span id="modified_word_count">0</span></p>
             
             <!-- Loading progress bar -->
@@ -107,6 +110,11 @@
                     return word.length > 0;
                 }).length;
                 document.getElementById('modified_word_count').innerText = modifiedWordCount;
+
+                // Update the counts of technical, social, and educational words
+                document.getElementById('edu_count').innerText = data.edu_count;
+                document.getElementById('social_count').innerText = data.social_count;
+                document.getElementById('tech_count').innerText = data.tech_count;
             })
             .catch(error => {
                 console.error('Error:', error);

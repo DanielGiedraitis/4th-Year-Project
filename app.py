@@ -82,7 +82,7 @@ def analyze_text(text):
 
     modified_text = f"Print Recommendations."
 
-    return educational_score, social_score, technological_score, total_words, modified_text
+    return educational_score, social_score, technological_score, educational_count, social_count, technological_count, total_words, modified_text
 
 
 def modify_text_social(text):
@@ -103,8 +103,8 @@ def modify_description():
     text_to_modify = request.form['text']
     modification_type = request.form['modification_type']
 
-    # Analyze the text to get scores
-    educational_score, social_score, technological_score, _, total_words = analyze_text(text_to_modify)
+    # Analyze the text to get scores and counts
+    educational_score, social_score, technological_score, educational_count, social_count, technological_count, _, total_words = analyze_text(text_to_modify)
 
     max_tokens_limit = 1500
 
@@ -140,8 +140,8 @@ def modify_description():
         # Access the assistant's reply from 'choices' key
         modified_text = response.choices[0].message.content
 
-        # Reanalyze the modified text to get updated scores
-        educational_score, social_score, technological_score, _, total_words = analyze_text(modified_text)
+        # Reanalyze the modified text to get updated scores and counts
+        educational_score, social_score, technological_score, educational_count, social_count, technological_count, _, total_words = analyze_text(modified_text)
 
         # Highlight technical, social, and educational words in the modified text
         modified_text_with_highlights = ""
@@ -165,6 +165,9 @@ def modify_description():
         'edu_score': educational_score,
         'social_score': social_score,
         'tech_score': technological_score,
+        'edu_count': educational_count,
+        'social_count': social_count,
+        'tech_count': technological_count,
         'word_count': total_words
     }
 
@@ -237,7 +240,7 @@ def courses_json():
 def analyze():
     text_to_analyze = request.form['text']
 
-    educational_score, social_score, technological_score, total_words, modified_text = analyze_text(text_to_analyze)
+    educational_score, social_score, technological_score, educational_count, social_count, technological_count, total_words, modified_text = analyze_text(text_to_analyze)
 
     # Get the lists of educational, social, and technological words
     educational_words = list(educational_lemmas)
@@ -246,6 +249,7 @@ def analyze():
 
     return render_template('result.html', original_text=text_to_analyze, modified_text=modified_text,
                            edu_score=educational_score, social_score=social_score, tech_score=technological_score,
+                           edu_count=educational_count, social_count=social_count, tech_count=technological_count,
                            total_words=total_words, educational_words=educational_words,
                            social_words=social_words, technological_words=technological_words)
 

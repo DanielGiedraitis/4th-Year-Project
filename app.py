@@ -4,8 +4,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 import nltk
 from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
-from nltk.stem import PorterStemmer
 import openpyxl
 from openai import OpenAI
 import os
@@ -49,13 +47,9 @@ def load_lemmas():
 
 educational_lemmas, social_lemmas, technical_lemmas = load_lemmas()
 
-stop_words = set(stopwords.words('english'))
-porter = PorterStemmer()
-
 
 def preprocess_and_tokenize(text):
     words = word_tokenize(text.lower())
-    words = [porter.stem(word) for word in words if word.isalpha() and word not in stop_words]
     return words
 
 

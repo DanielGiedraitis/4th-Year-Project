@@ -100,7 +100,7 @@ def modify_description():
     # Analyze the text to get scores and counts
     educational_score, social_score, technological_score, educational_count, social_count, technological_count, _, total_words = analyze_text(text_to_modify)
 
-    max_tokens_limit = 1500
+    max_tokens_limit = 2500
 
     # Retrieve the corresponding lemma set based on the modification type
     lemmas_set = {
@@ -112,12 +112,16 @@ def modify_description():
     # Extract a subset of lemmas to be used in the modification
     lemmas_to_use = list(lemmas_set)
 
+    # Determine the length of the description modification
+    max_length = len(text_to_modify.split())
+
     # Construct the assistant message content with lemmas
-    assistant_message = f"Make the description more {modification_type}. " \
-                        f"Educational score: {educational_score}%, " \
-                        f"Social score: {social_score}%, " \
-                        f"Technical score: {technological_score}%. " \
-                        f"Use the following lemmas: {', '.join(lemmas_to_use)}."
+    assistant_message = f"Make the description more {modification_type}. Modify to a length of approximately {max_length} words. " \
+                        f"This is the current " \
+                        f"Educational lemma count: {educational_count}, " \
+                        f"Social lemma count: {social_count}, " \
+                        f"Technical lemma count: {technological_count}. " \
+                        f"Use the following lemmas to increase the {modification_type} count: {', '.join(lemmas_to_use)}."
 
     # API request to OpenAI for description modification
     try:

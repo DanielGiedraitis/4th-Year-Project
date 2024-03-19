@@ -285,7 +285,9 @@ select::-ms-expand {
     margin-right: 1px; /* Margin between select boxes */
     select {
         flex: 1;
-        padding: 1em;
+        padding: 1em; /* Reduced padding */
+        max-width: 86%; /* Limit the maximum width */
+        height: 3em; /* Set the height */
         cursor: pointer;
       }
 

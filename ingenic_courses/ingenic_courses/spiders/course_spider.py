@@ -38,8 +38,13 @@ class CourseSpider(scrapy.Spider):
 
         # Dublin City University  
         elif institution.strip() == 'Dublin City University':
-            description = response.css('.overview-full-section.flex-container p::text').getall()
-            description = [desc.strip() for desc in description if desc.strip()]
+            if level.strip() == 'Undergrad':
+                description = response.css('.overview-full-section.flex-container p::text').getall()
+                description = [desc.strip() for desc in description if desc.strip()]
+            elif level.strip() == 'Postgrad':
+                description = response.css('#collapse-prospectus-intro .field--item p::text, #collapse-prospectus-about .field--item p::text').getall()
+                description = [desc.strip() for desc in description if desc.strip()]
+            
             course_content = response.css('.course-structure-full-section.flex-container ::text, .course-structure-full-section.flex-container a::attr(href)').getall()
             course_content = [course.strip() for course in course_content if course.strip()] 
 

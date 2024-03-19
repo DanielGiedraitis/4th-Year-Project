@@ -20,7 +20,7 @@ app.config['SECRET_KEY'] = 'secret_key'
 db = SQLAlchemy(app)
 
 # Set OpenAI API key using an environment variable
-os.environ["OPENAI_API_KEY"] = ''
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 # Initialise OpenAI client
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
@@ -116,12 +116,12 @@ def modify_description():
     max_length = len(text_to_modify.split())
 
     # Construct the assistant message content with lemmas
-    assistant_message = f"Make the description more {modification_type}. Modify to a length of approximately {max_length} words. " \
+    assistant_message = f"Make the description more {modification_type} but keep original contents of the description. Modify to a length of approximately {max_length} words. " \
                         f"This is the current " \
                         f"Educational lemma count: {educational_count}, " \
                         f"Social lemma count: {social_count}, " \
                         f"Technical lemma count: {technological_count}. " \
-                        f"Use the following lemmas to increase the {modification_type} count: {', '.join(lemmas_to_use)}."
+                        f"Use the following lemmas to increase the {modification_type} lemma count: {', '.join(lemmas_to_use)}."
 
     # API request to OpenAI for description modification
     try:

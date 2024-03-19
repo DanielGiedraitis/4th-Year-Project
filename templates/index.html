@@ -26,26 +26,32 @@
             <form action="/analyze" method="post">
                 <!-- Dropdowns container -->
                 <div class="dropdown-container">
-                    <select name="institution" id="institution">
-                        <option value="" disabled selected>Select Institution</option>
-                        <!-- Populate this dropdown dynamically -->
-                    </select>
-                    <select name="level" id="level" disabled>
-                        <option value="" disabled selected>Select Level</option>
-                        <option value="undergrad">Undergrad</option>
-                        <option value="postgrad">Postgrad</option>
-                    </select>
-                    <select name="course_title" id="course_title" disabled>
-                        <option value="" disabled selected>Select Course</option>
-                        <!-- Populate this dropdown dynamically -->
-                    </select>
+                    <div class="select">
+                        <select name="institution" id="institution">
+                            <option value="" disabled selected>Select Institution</option>
+                            <!-- Populate this dropdown dynamically -->
+                        </select>
+                    </div>
+                    <div class="select">
+                        <select name="level" id="level" disabled>
+                            <option value="" disabled selected>Select Level</option>
+                            <option value="undergrad">Undergrad</option>
+                            <option value="postgrad">Postgrad</option>
+                        </select>
+                    </div>
+                    <div class="select">
+                        <select name="course_title" id="course_title" disabled>
+                            <option value="" disabled selected>Select Course</option>
+                            <!-- Populate this dropdown dynamically -->
+                        </select>
+                    </div>
                 </div>
                 <!-- Text area for description -->
                 <textarea name="text" id="description" placeholder="Description"></textarea>
                 <button type="submit">Analyse</button>
             </form>
         </div>
-    </div>
+    </div>    
 
     <script>
         const institutionDropdown = document.getElementById('institution');

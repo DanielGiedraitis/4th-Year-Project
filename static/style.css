@@ -253,15 +253,77 @@ body.register-page form button {
 
 
 /* CSS for dropdowns in index.html */
-.dropdown-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+:root {
+    --background-select: linear-gradient(to left, #34495e 3rem, #2c3e50 3rem);
+    --darkgray: #2c3e50;
+}
+  
+select {
+    /* Reset Select */
+    appearance: none;
+    border: 0;
+    outline: 0;
+    background: none;
+    color: #fff;
+    font-weight: bold;
+    box-shadow: none;
 }
 
-.dropdown-container select {
-    width: 250px; 
+/* Remove IE arrow */
+select::-ms-expand {
+    display: none;
 }
+
+/* Custom Select wrapper */
+.select {
+    position: relative;
+    display: flex;
+    width: 256px; /* Width of boxes */
+    background: var(--background-select);
+    border-radius: 0.25em;
+    overflow: hidden;
+    margin-right: 1px; /* Margin between select boxes */
+    select {
+        flex: 1;
+        padding: 1em;
+        cursor: pointer;
+      }
+
+    &::after {
+        content: "\25BC";
+        position: absolute;
+        color: #fff;
+        right: 1rem;
+        top: 0.8rem;
+        transition: 0.25s all ease;
+        pointer-events: none; 
+    }
+
+    &:hover::after {
+        color: #f39c12;
+        animation: bounce 0.5s infinite;
+    }
+}
+
+/* Bounce animation */
+@keyframes bounce {
+    25% {
+      transform: translatey(5px);
+    }
+    75% {
+      transform: translatey(-5px);
+    }
+}
+
+.dropdown-container {
+    display: flex;
+}
+
+/* Change background color of options */
+select option {
+    background-color: var(--darkgray);
+}
+  
 
 #description {
     width: 764px; 

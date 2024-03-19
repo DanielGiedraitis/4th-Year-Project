@@ -265,6 +265,7 @@ body.register-page form button {
 
 #description {
     width: 764px; 
+    resize: none;
 }
 
 /* Styles for the horizontal navbar */

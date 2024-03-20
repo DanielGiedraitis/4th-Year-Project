@@ -3,7 +3,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background: linear-gradient(-45deg, #C2C094, #827081, #A9A587);
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
     margin: 0;
@@ -35,12 +35,69 @@ form textarea {
     height: 400px; 
 }
 
-form button {
-    width: 100%; 
-    height: 50px; 
-    font-size: 18px; 
-    font-weight: bold;
+/* CSS for analyse button */
+.Analyse-Button {
+  text-decoration: none;
+  position: relative;
+  border: none;
+  font-size: 20px !important;
+  font-weight: bold; 
+  font-family: inherit;
+  cursor: pointer;
+  color: #fff;
+  width: 758px !important;
+  height: 2.3em !important;
+  line-height: 2em;
+  text-align: center;
+  background: linear-gradient(90deg, #390040, #CC3F0C, #C2C094, #390040);
+  background-size: 300%;
+  border-radius: 5px;
+  z-index: 1;
+  margin-top: 5px;
 }
+
+.Analyse-Button:hover {
+  animation: ani 8s linear infinite;
+  border: none;
+}
+
+@keyframes ani {
+  0% {
+    background-position: 0%;
+  }
+
+  100% {
+    background-position: 400%;
+  }
+}
+
+.Analyse-Button:before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  z-index: -1;
+  background: linear-gradient(90deg, #390040, #CC3F0C, #C2C094, #390040);
+  background-size: 400%;
+  border-radius: 5px;
+  transition: 1s;
+}
+
+.Analyse-Button:hover::before {
+  filter: blur(20px);
+}
+
+.Analyse-Button:active {
+  background: linear-gradient(32deg, #390040, #CC3F0C, #C2C094, #390040);
+}
+
+/* Title for index.html page */
+.course-description {
+    color: white;
+    font-weight: bold;
+  }
 
 .result-container {
     text-align: center;
@@ -156,7 +213,7 @@ body.index-page form button {
 
 #loading-bar {
     height: 100%;
-    background-color: #4caf50; /* Green loading bar color */
+    background-color: #CC3F0C; /* Orange loading bar color */
     width: 0%; 
 }
 
@@ -164,7 +221,7 @@ body.index-page form button {
 /* Login/Register Page Styles */
 body.login-page,
 body.register-page {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background: linear-gradient(-45deg, #C2C094, #827081, #A9A587);
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
 }
@@ -254,8 +311,8 @@ body.register-page form button {
 
 /* CSS for dropdowns in index.html */
 :root {
-    --background-select: linear-gradient(to left, #34495e 3rem, #2c3e50 3rem);
-    --darkgray: #2c3e50;
+    --background-select: linear-gradient(to left, #CC3F0C 3rem, #390040 3rem);
+    --darkpurple: #390040;
 }
   
 select {
@@ -302,7 +359,7 @@ select::-ms-expand {
     }
 
     &:hover::after {
-        color: #f39c12;
+        color: #fff;
         animation: bounce 0.5s infinite;
     }
 }
@@ -323,7 +380,7 @@ select::-ms-expand {
 
 /* Change background color of options */
 select option {
-    background-color: var(--darkgray);
+    background-color: var(--darkpurple);
 }
   
 
@@ -338,7 +395,7 @@ select option {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #383434; 
+    background-color: #390040; 
     padding: 20px 0; 
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
     display: flex;
@@ -382,7 +439,7 @@ select option {
 }
 
 .navbar ul li:first-child a {
-    background-color: #08ac6c; 
+    background-color: #CC3F0C; 
     padding: 21px 20px; 
 }
 

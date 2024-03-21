@@ -324,6 +324,7 @@ select {
     color: #fff;
     font-weight: bold;
     box-shadow: none;
+    max-width: calc(100% - 0rem);
 }
 
 /* Remove IE arrow */
@@ -342,8 +343,7 @@ select::-ms-expand {
     margin-right: 1px; /* Margin between select boxes */
     select {
         flex: 1;
-        padding: 1em; /* Reduced padding */
-        max-width: 86%; /* Limit the maximum width */
+        padding: 1em 3rem 1em 1em; /* Reduced padding */
         height: 3em; /* Set the height */
         cursor: pointer;
       }

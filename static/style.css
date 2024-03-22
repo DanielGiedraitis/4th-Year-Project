@@ -506,6 +506,12 @@ select option {
     margin-top: 5px; 
 }
 
+/* Style for locked buttons */
+.modify-button:disabled {
+    opacity: 0.5; /* Reduce opacity to indicate disabled state */
+    cursor: not-allowed; /* Change cursor to indicate not clickable */
+}
+
 /* Style for educational button */
 .educational-button {
     background: blue;

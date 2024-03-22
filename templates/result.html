@@ -74,6 +74,11 @@
 
     <script>
         function modifyDescription(modificationType) {
+            // Disable all buttons
+            document.querySelectorAll('.modify-button').forEach(button => {
+                button.disabled = true;
+            });
+
             var textToModify = document.getElementById('current_description').innerText;
             var loadingBar = document.getElementById('loading-bar');
     

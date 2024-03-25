@@ -454,6 +454,38 @@ select option {
     color: black;
 }
 
+/* Adjustments for the sign-out button top right of the nav bar*/
+.navbar .navbar-right {
+    margin-left: auto; /* Push the sign-out button to the right */
+}
+
+.navbar .navbar-right a {
+    display: flex; /* Ensure the link container expands to cover the entire area */
+    align-items: center; 
+    text-decoration: none;
+    color: white;
+    padding: 7.3px 20px; 
+    margin-top: -10px; 
+    margin-right: -10px; 
+}
+
+.navbar .navbar-right a:hover {
+    background-color: #ddd;
+}
+
+.navbar .navbar-right a:hover span {
+    color: black; /* Change text color to black when hovering */
+}
+
+.navbar .navbar-right a:hover img {
+    filter: invert(100%); /* Invert the color of the image when hovered over */
+}
+
+.navbar .navbar-right img {
+    margin-right: 5px; /* Add margin between the image and the text */
+}
+
+
 /* Styles for the Current/modified description */
 .scroll-box {
     overflow-y: auto;

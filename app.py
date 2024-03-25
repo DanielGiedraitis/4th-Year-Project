@@ -102,6 +102,17 @@ def modify_description():
 
     max_tokens_limit = 2500
 
+    # Calculate the target count for the chosen category in the modified description
+    if modification_type == 'educational':
+        target_count = educational_count + 2
+    elif modification_type == 'social':
+        target_count = social_count + 2
+    elif modification_type == 'technical':
+        target_count = technological_count + 2
+    else:
+        # Handle invalid modification type
+        return {'error': 'Invalid modification type'}
+
     # Retrieve the corresponding lemma set based on the modification type
     lemmas_set = {
         'educational': educational_lemmas,
@@ -116,12 +127,9 @@ def modify_description():
     max_length = len(text_to_modify.split())
 
     # Construct the assistant message content with lemmas
-    assistant_message = f"Make the description more {modification_type} but keep original contents of the description. Modify to a length of approximately {max_length} words. " \
-                        f"This is the current " \
-                        f"Educational lemma count: {educational_count}, " \
-                        f"Social lemma count: {social_count}, " \
-                        f"Technical lemma count: {technological_count}. " \
-                        f"Use the following lemmas to increase the {modification_type} lemma count: {', '.join(lemmas_to_use)}."
+    assistant_message = f"Use '{target_count}' or more of the following lemmas in the description. Lemmas: ({', '.join(lemmas_to_use)}.)" \
+                        f"Make the description more {modification_type} but keep original contents of the description. Modify to a length of approximately {max_length} words. " 
+                        
 
     # API request to OpenAI for description modification
     try:
@@ -134,6 +142,8 @@ def modify_description():
             ],
             max_tokens=max_tokens_limit,
         )
+
+        print(assistant_message)
 
         # Access the assistant's reply from 'choices' key
         modified_text = response.choices[0].message.content

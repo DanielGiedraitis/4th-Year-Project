@@ -20,10 +20,18 @@
             </li>
         </ul>
     </div>
+
+    <!-- Custom alert popup -->
+    <div id="customAlert" class="custom-alert custom-alert-hidden">
+        <h2>Alert</h2>
+        <p>Course Description must be at least 50 words long.</p>
+        <button onclick="hideCustomAlert()">OK</button>
+    </div>
+
     <div class="d-flex flex-column justify-content-center w-100 h-100">
         <div class="container">
             <h1 class="heading-description">Select or Enter a Course Description</h1>
-            <form action="/analyze" method="post">
+            <form action="/analyze" method="post" onsubmit="return validateDescriptionLength()">
                 <!-- Dropdowns container -->
                 <div class="dropdown-container">
                     <div class="select">
@@ -122,6 +130,24 @@
                 const selectedCourseDescription = courses.find(course => course.course_title === selectedCourse).description;
                 descriptionTextarea.value = selectedCourseDescription;
             });
+        }
+
+        // Function to validate description length before form submission
+        function validateDescriptionLength() {
+            var description = document.getElementById('description').value;
+            var wordCount = description.split(/\s+/).length;
+
+            if (wordCount < 50) {
+                document.getElementById('customAlert').classList.remove('custom-alert-hidden');
+                return false; // Prevent form submission
+            }
+
+            return true; // Allow form submission
+        }
+
+        // Function to hide the custom alert popup
+        function hideCustomAlert() {
+            document.getElementById('customAlert').classList.add('custom-alert-hidden');
         }
 
         // Call the function to populate dropdowns

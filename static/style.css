@@ -385,6 +385,12 @@ select::-ms-expand {
 select option {
     background-color: var(--darkpurple);
 }
+
+/* Apply styles to select elements when disabled */
+.select select:disabled {
+    opacity: 0.5; /* Reduce opacity to indicate disabled state */
+    cursor: not-allowed; /* Change cursor to indicate not clickable */
+}
   
 
 #description {
@@ -612,7 +618,6 @@ select option {
     word-break: break-word;
     border: 0;
   } 
-
 
 
   /* Custom alert popup styles */

@@ -119,7 +119,7 @@ form textarea {
 }
 
 
-.recommendations-container {
+.modified-description {
     width: 48%; /* Adjusted width */
     height: 594px;
     box-sizing: border-box;
@@ -136,12 +136,12 @@ form textarea {
     float: left; /* Aligned to the left */
 }
 
-.recommendations-container {
+.modified-description {
     float: right; /* Aligned to the right */
 }
 
 .description-container h2,
-.recommendations-container h2 {
+.modified-description h2 {
     margin-bottom: 10px;
 }
 

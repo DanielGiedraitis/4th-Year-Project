@@ -52,8 +52,8 @@
         </div>
 
         <!-- Container for the recommendations -->
-        <div class="recommendations-container">
-            <h2>Recommended Modifications</h2>
+        <div class="modified-description">
+            <h2>Modified Description</h2>
             <!-- Display the scores under Recommended Modifications heading -->
             <p>Educational Score: <span id="edu_score">0%</span> <span class="score-box educational-box"></span>
                 (<span id="edu_count">0</span> educational words)</p>
@@ -69,16 +69,35 @@
             </div>
             
             <div id="modified_text" class="scroll-box">{{ modified_text }}</div>
+
+            <!-- Buttons for generating modified description -->
+            <button class="modify-button educational-button" onclick="generateModifiedDescription('educational')">More Educational</button>
+            <button class="modify-button social-button" onclick="generateModifiedDescription('social')">More Social</button>
+            <button class="modify-button technical-button" onclick="generateModifiedDescription('technical')">More Technical</button>
         </div>
     </div>
 
     <script>
+        // Function to enable/disable recommendation buttons
+        function toggleRecommendationButtons(disabled) {
+            const recommendationButtons = document.querySelectorAll('.modified-description .modify-button');
+            recommendationButtons.forEach(button => {
+                button.disabled = disabled;
+            });
+        }
+    
+        // Initially disable recommendation buttons
+        toggleRecommendationButtons(true);
+    
         function modifyDescription(modificationType) {
             // Disable all buttons
             document.querySelectorAll('.modify-button').forEach(button => {
                 button.disabled = true;
             });
-
+    
+            // Enable recommendation buttons
+            toggleRecommendationButtons(false);
+    
             var textToModify = document.getElementById('current_description').innerText;
             var loadingBar = document.getElementById('loading-bar');
     
@@ -115,7 +134,7 @@
                     return word.length > 0;
                 }).length;
                 document.getElementById('modified_word_count').innerText = modifiedWordCount;
-
+    
                 // Update the counts of technical, social, and educational words
                 document.getElementById('edu_count').innerText = data.edu_count;
                 document.getElementById('social_count').innerText = data.social_count;
@@ -138,16 +157,68 @@
                 }
             }, 50);
         }
-    </script>    
+
+        // Function to generate modified description
+        function generateModifiedDescription(modificationType) {
+            var textToModify = document.getElementById('modified_text').innerText;
+            var loadingBar = document.getElementById('loading-bar');
+
+            // Reset the loading bar
+            loadingBar.style.width = '0%';
+
+            // Show loading container
+            document.getElementById('loading-container').style.display = 'block';
+
+            // AJAX request to the modify_description route
+            fetch('/modify_description', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    'text': textToModify,
+                    'modification_type': modificationType
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Hide loading container
+                document.getElementById('loading-container').style.display = 'none';
+
+                // Update the modified_text area with the result
+                document.getElementById('modified_text').innerHTML = data.modified_text;
+                // Update the scores
+                document.getElementById('edu_score').innerText = data.edu_score + '%';
+                document.getElementById('social_score').innerText = data.social_score + '%';
+                document.getElementById('tech_score').innerText = data.tech_score + '%';
+                // Calculate and display word count for modified text
+                var modifiedWordCount = data.modified_text.split(/\s+/).filter(function(word) {
+                    return word.length > 0;
+                }).length;
+                document.getElementById('modified_word_count').innerText = modifiedWordCount;
+
+                // Update the counts of technical, social, and educational words
+                document.getElementById('edu_count').innerText = data.edu_count;
+                document.getElementById('social_count').innerText = data.social_count;
+                document.getElementById('tech_count').innerText = data.tech_count;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('loading-container').style.display = 'none';
+            });
+
+            // Simulate loading progress
+            var progress = 0;
+            var interval = setInterval(function() {
+                progress += 1;
+                loadingBar.style.width = progress + '%';
+
+                if (progress >= 100) {
+                    // Reset progress for the next iteration
+                    progress = 0;
+                }
+            }, 50);
+        }
+    </script>         
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-

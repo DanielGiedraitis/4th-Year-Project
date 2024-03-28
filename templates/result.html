@@ -163,8 +163,8 @@
     
         // Function to generate modified description
         function generateModifiedDescription(modificationType) {
-            // Disable all modify buttons
-            document.querySelectorAll('.modify-button').forEach(button => {
+            // Disable only the modify buttons for the modified description
+            document.querySelectorAll('.modified-description .modify-button').forEach(button => {
                 button.disabled = true;
             });
 
@@ -213,8 +213,8 @@
                 document.getElementById('social_count').innerText = data.social_count;
                 document.getElementById('tech_count').innerText = data.tech_count;
 
-                // Enable all modify buttons after description is generated
-                document.querySelectorAll('.modify-button').forEach(button => {
+                // Enable all modify buttons for the modified description after description is generated
+                document.querySelectorAll('.modified-description .modify-button').forEach(button => {
                     button.disabled = false;
                 });
             })

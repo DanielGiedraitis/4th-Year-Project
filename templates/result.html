@@ -123,6 +123,9 @@
                 // Hide loading container
                 document.getElementById('loading-container').style.display = 'none';
     
+                // Reset the loading interval
+                clearInterval(interval);
+    
                 // Update the modified_text area with the result
                 document.getElementById('modified_text').innerHTML = data.modified_text;
                 // Update the scores
@@ -157,18 +160,18 @@
                 }
             }, 50);
         }
-
+    
         // Function to generate modified description
         function generateModifiedDescription(modificationType) {
             var textToModify = document.getElementById('modified_text').innerText;
             var loadingBar = document.getElementById('loading-bar');
-
+    
             // Reset the loading bar
             loadingBar.style.width = '0%';
-
+    
             // Show loading container
             document.getElementById('loading-container').style.display = 'block';
-
+    
             // AJAX request to the modify_description route
             fetch('/modify_description', {
                 method: 'POST',
@@ -184,7 +187,10 @@
             .then(data => {
                 // Hide loading container
                 document.getElementById('loading-container').style.display = 'none';
-
+    
+                // Reset the loading interval
+                clearInterval(interval);
+    
                 // Update the modified_text area with the result
                 document.getElementById('modified_text').innerHTML = data.modified_text;
                 // Update the scores
@@ -196,7 +202,7 @@
                     return word.length > 0;
                 }).length;
                 document.getElementById('modified_word_count').innerText = modifiedWordCount;
-
+    
                 // Update the counts of technical, social, and educational words
                 document.getElementById('edu_count').innerText = data.edu_count;
                 document.getElementById('social_count').innerText = data.social_count;
@@ -206,19 +212,19 @@
                 console.error('Error:', error);
                 document.getElementById('loading-container').style.display = 'none';
             });
-
+    
             // Simulate loading progress
             var progress = 0;
             var interval = setInterval(function() {
                 progress += 1;
                 loadingBar.style.width = progress + '%';
-
+    
                 if (progress >= 100) {
                     // Reset progress for the next iteration
                     progress = 0;
                 }
             }, 50);
         }
-    </script>         
+    </script>           
 </body>
 </html>

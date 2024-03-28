@@ -102,13 +102,13 @@ form textarea {
 
 .result-container {
     text-align: center;
-    max-width: 1400px; 
+    max-width: 1600px; 
     margin: 0 auto; 
 }
 
 .description-container {
     width: 48%; /* Adjusted width */
-    height: 594px;
+    height: 610px;
     box-sizing: border-box;
     padding: 20px;
     margin: 20px 0;
@@ -121,7 +121,7 @@ form textarea {
 
 .modified-description {
     width: 48%; /* Adjusted width */
-    height: 594px;
+    height: 610px;
     box-sizing: border-box;
     padding: 20px;
     margin: 20px 0;
@@ -541,7 +541,7 @@ select option {
 
 /* Space between text box and buttons */
 .modify-button {
-    margin-top: 5px; 
+    margin-top: 13px; 
 }
 
 /* Style for locked buttons */
@@ -665,6 +665,3 @@ select option {
 .custom-alert-hidden {
     display: none;
 }
-
-
-

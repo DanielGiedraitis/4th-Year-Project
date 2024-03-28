@@ -85,28 +85,25 @@
                 button.disabled = disabled;
             });
         }
-    
+        
         // Initially disable recommendation buttons
         toggleRecommendationButtons(true);
-    
+        
         function modifyDescription(modificationType) {
-            // Disable all buttons
-            document.querySelectorAll('.modify-button').forEach(button => {
+            // Disable all buttons for Current Description
+            document.querySelectorAll('.description-container .modify-button').forEach(button => {
                 button.disabled = true;
             });
-    
-            // Enable recommendation buttons
-            toggleRecommendationButtons(false);
-    
+        
             var textToModify = document.getElementById('current_description').innerText;
             var loadingBar = document.getElementById('loading-bar');
-    
+        
             // Reset the loading bar
             loadingBar.style.width = '0%';
-    
+        
             // Show loading container
             document.getElementById('loading-container').style.display = 'block';
-    
+        
             // AJAX request to the modify_description route
             fetch('/modify_description', {
                 method: 'POST',
@@ -122,10 +119,10 @@
             .then(data => {
                 // Hide loading container
                 document.getElementById('loading-container').style.display = 'none';
-    
+        
                 // Reset the loading interval
                 clearInterval(interval);
-    
+        
                 // Update the modified_text area with the result
                 document.getElementById('modified_text').innerHTML = data.modified_text;
                 // Update the scores
@@ -137,46 +134,49 @@
                     return word.length > 0;
                 }).length;
                 document.getElementById('modified_word_count').innerText = modifiedWordCount;
-    
+        
                 // Update the counts of technical, social, and educational words
                 document.getElementById('edu_count').innerText = data.edu_count;
                 document.getElementById('social_count').innerText = data.social_count;
                 document.getElementById('tech_count').innerText = data.tech_count;
+        
+                // Enable recommendation buttons for Modified Description after generating it
+                toggleRecommendationButtons(false);
             })
             .catch(error => {
                 console.error('Error:', error);
                 document.getElementById('loading-container').style.display = 'none';
             });
-    
+        
             // Simulate loading progress
             var progress = 0;
             var interval = setInterval(function() {
                 progress += 1;
                 loadingBar.style.width = progress + '%';
-    
+        
                 if (progress >= 100) {
                     // Reset progress for the next iteration
                     progress = 0;
                 }
             }, 50);
         }
-    
+        
         // Function to generate modified description
         function generateModifiedDescription(modificationType) {
             // Disable only the modify buttons for the modified description
             document.querySelectorAll('.modified-description .modify-button').forEach(button => {
                 button.disabled = true;
             });
-
+    
             var textToModify = document.getElementById('modified_text').innerText;
             var loadingBar = document.getElementById('loading-bar');
-
+    
             // Reset the loading bar
             loadingBar.style.width = '0%';
-
+    
             // Show loading container
             document.getElementById('loading-container').style.display = 'block';
-
+    
             // AJAX request to the modify_description route
             fetch('/modify_description', {
                 method: 'POST',
@@ -192,10 +192,10 @@
             .then(data => {
                 // Hide loading container
                 document.getElementById('loading-container').style.display = 'none';
-
+    
                 // Reset the loading interval
                 clearInterval(interval);
-
+    
                 // Update the modified_text area with the result
                 document.getElementById('modified_text').innerHTML = data.modified_text;
                 // Update the scores
@@ -207,12 +207,12 @@
                     return word.length > 0;
                 }).length;
                 document.getElementById('modified_word_count').innerText = modifiedWordCount;
-
+    
                 // Update the counts of technical, social, and educational words
                 document.getElementById('edu_count').innerText = data.edu_count;
                 document.getElementById('social_count').innerText = data.social_count;
                 document.getElementById('tech_count').innerText = data.tech_count;
-
+    
                 // Enable all modify buttons for the modified description after description is generated
                 document.querySelectorAll('.modified-description .modify-button').forEach(button => {
                     button.disabled = false;
@@ -222,19 +222,19 @@
                 console.error('Error:', error);
                 document.getElementById('loading-container').style.display = 'none';
             });
-
+    
             // Simulate loading progress
             var progress = 0;
             var interval = setInterval(function() {
                 progress += 1;
                 loadingBar.style.width = progress + '%';
-
+    
                 if (progress >= 100) {
                     // Reset progress for the next iteration
                     progress = 0;
                 }
             }, 50);
         }
-    </script>           
+    </script>         
 </body>
 </html>

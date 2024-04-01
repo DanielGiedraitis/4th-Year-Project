@@ -711,3 +711,28 @@ select option {
 .custom-alert-hidden {
     display: none;
 }
+
+
+.copy-button img {
+    width: 25px;
+    height: 26px;
+}
+
+.copy-button {
+    float: right; /* Aligned to the right */
+    margin-top: 13px; /* Margin to bring the button down */
+}
+
+#word-count {
+    float: left; /* Aligned to the left */
+    margin-top: 20px; /* Margin to bring the button down */
+    font-family: Helvetica;
+    font-weight: bold;
+}
+
+#modified_word_count {
+    float: left; /* Aligned to the left */
+    margin-top: 20px; /* Margin to bring the button down */
+    font-family: Helvetica;
+    font-weight: bold;
+}

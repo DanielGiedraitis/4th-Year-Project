@@ -108,7 +108,7 @@ form textarea {
 
 .description-container {
     width: 46%; /* Adjusted width */
-    height: 610px;
+    height: 664px;
     box-sizing: border-box;
     padding: 20px;
     margin: 20px 0;
@@ -167,7 +167,7 @@ form textarea {
 
 .modified-description {
     width: 46%; /* Adjusted width */
-    height: 610px;
+    height: 664px;
     box-sizing: border-box;
     padding: 20px;
     margin: 20px 0;
@@ -541,7 +541,7 @@ select option {
 /* Styles for the Current/modified description */
 .scroll-box {
     overflow-y: auto;
-    height: 300px; 
+    height: 354px; 
     border: 2px solid #390040; /* Border for styling */
     padding: 5px; /* Padding for better readability */
 }
@@ -669,7 +669,7 @@ select option {
   /* Custom alert popup styles */
   .custom-alert {
     position: fixed;
-    top: 50%;
+    top: 9%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #fff;
@@ -682,12 +682,14 @@ select option {
 .custom-alert h2 {
     margin-top: 0;
     font-size: 24px;
+    font-family: Helvetica;
     color: #333;
 }
 
 .custom-alert p {
     margin-bottom: 0;
     font-size: 16px;
+    font-family: Helvetica;
     color: #666;
 }
 

@@ -265,15 +265,15 @@
 
         // Function to copy text to clipboard
         function copyToClipboard(elementId) {
-                    const textToCopy = document.getElementById(elementId).innerText;
-                    navigator.clipboard.writeText(textToCopy)
-                        .then(() => {
-                            console.log('Text copied to clipboard:', textToCopy);
-                        })
-                        .catch(error => {
-                            console.error('Error copying text:', error);
-                        });
-                }
+            const textToCopy = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    console.log('Text copied to clipboard:', textToCopy);
+                })
+                .catch(error => {
+                    console.error('Error copying text:', error);
+                });
+        }
     </script>         
 </body>
 </html>

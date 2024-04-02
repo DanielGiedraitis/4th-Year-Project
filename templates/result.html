@@ -103,25 +103,38 @@
                 button.disabled = disabled;
             });
         }
+
+        // Function to calculate word count excluding HTML tags
+        function calculateWordCount(text) {
+            // Remove HTML tags using a regular expression
+            var cleanText = text.replace(/<[^>]*>/g, "");
+            // Split the text into words and filter out empty strings
+            var words = cleanText.split(/\s+/).filter(function(word) {
+                return word.length > 0;
+            });
+            // Return the count of words
+            return words.length;
+        }
         
         // Initially disable recommendation buttons
         toggleRecommendationButtons(true);
         
+        // Function to modify description
         function modifyDescription(modificationType) {
             // Disable all buttons for Current Description
             document.querySelectorAll('.description-container .modify-button').forEach(button => {
                 button.disabled = true;
             });
-        
+
             var textToModify = document.getElementById('current_description').innerText;
             var loadingBar = document.getElementById('loading-bar');
-        
+
             // Reset the loading bar
             loadingBar.style.width = '0%';
-        
+
             // Show loading container
             document.getElementById('loading-container').style.display = 'block';
-        
+
             // AJAX request to the modify_description route
             fetch('/modify_description', {
                 method: 'POST',
@@ -137,10 +150,10 @@
             .then(data => {
                 // Hide loading container
                 document.getElementById('loading-container').style.display = 'none';
-        
+
                 // Reset the loading interval
                 clearInterval(interval);
-        
+
                 // Update the modified_text area with the result
                 document.getElementById('modified_text').innerHTML = data.modified_text;
                 // Update the scores
@@ -148,16 +161,14 @@
                 document.getElementById('social_score').innerText = data.social_score + '%';
                 document.getElementById('tech_score').innerText = data.tech_score + '%';
                 // Calculate and display word count for modified text
-                var modifiedWordCount = data.modified_text.split(/\s+/).filter(function(word) {
-                    return word.length > 0;
-                }).length;
+                var modifiedWordCount = calculateWordCount(data.modified_text);
                 document.getElementById('modified_word_count').innerText = modifiedWordCount + " Words";
-        
+
                 // Update the counts of technical, social, and educational words
                 document.getElementById('edu_count').innerText = data.edu_count;
                 document.getElementById('social_count').innerText = data.social_count;
                 document.getElementById('tech_count').innerText = data.tech_count;
-        
+
                 // Enable recommendation buttons for Modified Description after generating it
                 toggleRecommendationButtons(false);
             })
@@ -165,13 +176,13 @@
                 console.error('Error:', error);
                 document.getElementById('loading-container').style.display = 'none';
             });
-        
+
             // Simulate loading progress
             var progress = 0;
             var interval = setInterval(function() {
                 progress += 1;
                 loadingBar.style.width = progress + '%';
-        
+
                 if (progress >= 100) {
                     // Reset progress for the next iteration
                     progress = 0;
@@ -221,9 +232,7 @@
                 document.getElementById('social_score').innerText = data.social_score + '%';
                 document.getElementById('tech_score').innerText = data.tech_score + '%';
                 // Calculate and display word count for modified text
-                var modifiedWordCount = data.modified_text.split(/\s+/).filter(function(word) {
-                    return word.length > 0;
-                }).length;
+                var modifiedWordCount = calculateWordCount(data.modified_text);
                 document.getElementById('modified_word_count').innerText = modifiedWordCount + " Words";
     
                 // Update the counts of technical, social, and educational words

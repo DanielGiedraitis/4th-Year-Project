@@ -8,6 +8,7 @@ import openpyxl
 from openai import OpenAI
 import os
 import json
+import re
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -53,7 +54,15 @@ def preprocess_and_tokenize(text):
     return words
 
 
+def clickableUrls(text):
+    # Regular expression to detect URLs
+    url_pattern = r'https?://\S+'
+    # Replace URLs with clickable anchor tags
+    return re.sub(url_pattern, lambda x: f"<a href='{x.group(0)}'>{x.group(0)}</a>", text)
+
+
 def analyze_text(text):
+    text = clickableUrls(text)
     words = preprocess_and_tokenize(text)
 
     educational_lemmas_lower = {lemma.lower() for lemma in educational_lemmas}
@@ -77,19 +86,6 @@ def analyze_text(text):
     modified_text = f"Print Recommendations."
 
     return educational_score, social_score, technological_score, educational_count, social_count, technological_count, total_words, modified_text
-
-
-def modify_text_social(text):
-    # Implement logic to modify the description to be more social
-    return "Modified social description"
-
-def modify_text_technical(text):
-    # Implement logic to modify the description to be more technical
-    return "Modified technical description"
-
-def modify_text_educational(text):
-    # Implement logic to modify the description to be more educational
-    return "Modified educational description"
 
 
 @app.route('/modify_description', methods=['POST'])
@@ -142,8 +138,6 @@ def modify_description():
             ],
             max_tokens=max_tokens_limit,
         )
-
-        print(assistant_message)
 
         # Access the assistant's reply from 'choices' key
         modified_text = response.choices[0].message.content

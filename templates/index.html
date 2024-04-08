@@ -118,8 +118,9 @@
 
                 // Populate courses for the selected institution and level
                 const coursesForLevel = courses.filter(course => course.institution === selectedInstitution && course.level === selectedLevel);
-                coursesForLevel.forEach(course => {
-                    courseDropdown.innerHTML += `<option value="${course.course_title}">${course.course_title}</option>`;
+                const sortedCourses = coursesForLevel.map(course => course.course_title).sort();
+                sortedCourses.forEach(courseTitle => {
+                    courseDropdown.innerHTML += `<option value="${courseTitle}">${courseTitle}</option>`;
                 });
                 courseDropdown.disabled = false;
             });

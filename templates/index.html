@@ -74,7 +74,7 @@
 
             // Populate institution dropdown
             institutionDropdown.innerHTML = '<option value="" disabled selected>Select Institution</option>';
-            const institutions = Array.from(new Set(courses.map(course => course.institution)));
+            const institutions = Array.from(new Set(courses.map(course => course.institution))).sort();
             institutions.forEach(institution => {
                 institutionDropdown.innerHTML += `<option value="${institution}">${institution}</option>`;
             });

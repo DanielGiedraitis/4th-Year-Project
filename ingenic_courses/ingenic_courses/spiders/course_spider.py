@@ -45,7 +45,7 @@ class CourseSpider(scrapy.Spider):
         description = [desc.strip() for desc in description if desc.strip()]
         level = response.meta['level']
         yield {
-            'institution': 'Waterford Institute of Technology',
+            'institution': 'Institute of Technology Waterford',
             'level': level,
             'course_title': course_title,
             'description': description

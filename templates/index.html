@@ -96,7 +96,7 @@
                 descriptionTextarea.setAttribute('placeholder', 'Description');
 
                 // Populate levels for the selected institution
-                const levels = Array.from(new Set(courses.filter(course => course.institution === selectedInstitution).map(course => course.level)));
+                const levels = Array.from(new Set(courses.filter(course => course.institution === selectedInstitution).map(course => course.level))).sort();
                 levels.forEach(level => {
                     levelDropdown.innerHTML += `<option value="${level}">${level.charAt(0).toUpperCase() + level.slice(1)}</option>`;
                 });

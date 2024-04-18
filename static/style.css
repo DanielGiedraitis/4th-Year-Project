@@ -108,13 +108,14 @@ form textarea {
 
 .description-container {
     width: 46%; /* Adjusted width */
-    height: 664px;
+    height: 690px;
     box-sizing: border-box;
     padding: 20px;
     margin: 20px 0;
     border: 4px solid #390040;
     border-radius: 10px;
     font-family: Helvetica;
+    font-size: 18px;
     background-color: #fff;
 }
 
@@ -167,13 +168,14 @@ form textarea {
 
 .modified-description {
     width: 46%; /* Adjusted width */
-    height: 664px;
+    height: 690px;
     box-sizing: border-box;
     padding: 20px;
     margin: 20px 0;
     border: 4px solid #390040;
     border-radius: 10px;
     font-family: Helvetica;
+    font-size: 18px;
     background-color: #fff;
 }
 
@@ -445,6 +447,7 @@ select {
     color: #fff;
     font-weight: bold;
     box-shadow: none;
+    font-size: 14px;
     max-width: calc(100% - 0rem);
 }
 
@@ -514,6 +517,7 @@ select option {
 #description {
     width: 764px; 
     resize: none;
+    font-size: 15px;
     font-family: Helvetica;
 }
 

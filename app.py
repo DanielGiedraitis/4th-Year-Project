@@ -217,6 +217,39 @@ def register():
     return render_template('register.html')
 
 
+@app.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        username = request.form['username']
+        old_password = request.form['old_password']
+        new_password = request.form['new_password']
+        confirm_password = request.form['confirm_password']
+
+        # Check if the username exists
+        user = User.query.filter_by(username=username).first()
+        if not user:
+            error = 'Username not found.'
+            return render_template('forgot_password.html', error=error)
+
+        # Verify the old password
+        if not check_password_hash(user.password_hash, old_password):
+            error = 'Incorrect old password.'
+            return render_template('forgot_password.html', error=error)
+
+        # Check if the new password and confirm password match
+        if new_password != confirm_password:
+            error = 'New password and confirm password do not match.'
+            return render_template('forgot_password.html', error=error)
+
+        # Update the password
+        user.password_hash = generate_password_hash(new_password, method='pbkdf2:sha256')
+        db.session.commit()
+
+        return redirect(url_for('login'))
+
+    return render_template('forgot_password.html')
+
+
 @app.route('/logout')
 def logout():
     session.pop('user_id', None)

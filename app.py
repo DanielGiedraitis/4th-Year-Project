@@ -88,6 +88,20 @@ def analyze_text(text):
     return educational_score, social_score, technological_score, educational_count, social_count, technological_count, total_words, modified_text
 
 
+def filter_descriptions(courses):
+    filtered_courses = [] # Filter out descriptions that have 50 or less words
+    for course in courses:
+        description = course['description']
+        if isinstance(description, list):
+            # Join the list of strings into a single string
+            description = ' '.join(description)
+        if isinstance(description, str):
+            word_count = len(description.split())
+            if word_count >= 50:
+                filtered_courses.append(course)
+    return filtered_courses
+
+
 @app.route('/modify_description', methods=['POST'])
 def modify_description():
     text_to_modify = request.form['text']
@@ -268,7 +282,10 @@ def index():
 def courses_json():
     with open('ingenic_courses/courses.json', encoding='utf-8') as f:
         courses = json.load(f)
-    return jsonify(courses)
+    
+    filtered_courses = filter_descriptions(courses)
+    
+    return jsonify(filtered_courses)
 
 
 @app.route('/analyze', methods=['POST'])

@@ -298,15 +298,6 @@ body.forgot-password-page h1 {
     margin-bottom: 30px;
 }
 
-body.login-page label,
-body.register-page label,
-body.forgot-password-page label {
-    display: block;
-    margin-bottom: 20px;
-    color: #555555;
-    font-size: 20px;
-}
-
 body.login-page input,
 body.register-page input,
 body.forgot-password-page input {

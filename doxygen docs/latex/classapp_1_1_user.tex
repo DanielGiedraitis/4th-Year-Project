@@ -1,0 +1,31 @@
+\doxysection{app.\+User Class Reference}
+\hypertarget{classapp_1_1_user}{}\label{classapp_1_1_user}\index{app.User@{app.User}}
+Inheritance diagram for app.\+User\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classapp_1_1_user}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classapp_1_1_user_a0ffe82d4df4f143e91ea8b1338407cbe}\label{classapp_1_1_user_a0ffe82d4df4f143e91ea8b1338407cbe} 
+{\bfseries id} = db.\+Column(db.\+Integer, primary\+\_\+key=True)
+\item 
+\Hypertarget{classapp_1_1_user_af2ff6f4735cfbb67a9d3ef5c6a6132cf}\label{classapp_1_1_user_af2ff6f4735cfbb67a9d3ef5c6a6132cf} 
+{\bfseries username} = db.\+Column(db.\+String(80), unique=True, nullable=False)
+\item 
+\Hypertarget{classapp_1_1_user_ae9475adeb548504dcfb14ea2c2a8a875}\label{classapp_1_1_user_ae9475adeb548504dcfb14ea2c2a8a875} 
+{\bfseries email} = db.\+Column(db.\+String(120), unique=True, nullable=False)
+\item 
+\Hypertarget{classapp_1_1_user_aa40c9aa8b7bd6f016050fd640ce8111e}\label{classapp_1_1_user_aa40c9aa8b7bd6f016050fd640ce8111e} 
+{\bfseries password\+\_\+hash} = db.\+Column(db.\+String(120), nullable=False)
+\item 
+\Hypertarget{classapp_1_1_user_a7fd2475d4721bb29de509313e95a842d}\label{classapp_1_1_user_a7fd2475d4721bb29de509313e95a842d} 
+{\bfseries created\+\_\+at} = db.\+Column(db.\+Date\+Time, default=datetime.\+utcnow)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+app.\+py\end{DoxyCompactItemize}

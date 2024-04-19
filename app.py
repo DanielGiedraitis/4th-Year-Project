@@ -114,11 +114,11 @@ def modify_description():
 
     # Calculate the target count for the chosen category in the modified description
     if modification_type == 'educational':
-        target_count = educational_count + 2
+        target_count = educational_count + 5
     elif modification_type == 'social':
-        target_count = social_count + 2
+        target_count = social_count + 5
     elif modification_type == 'technical':
-        target_count = technological_count + 2
+        target_count = technological_count + 5
     else:
         # Handle invalid modification type
         return {'error': 'Invalid modification type'}
@@ -137,7 +137,7 @@ def modify_description():
     max_length = len(text_to_modify.split())
 
     # Construct the assistant message content with lemmas
-    assistant_message = f"Use '{target_count}' or more of the following lemmas in the description. Lemmas: ({', '.join(lemmas_to_use)}.)" \
+    assistant_message = f"Use {target_count} or more of the following lemmas in the description. Lemmas: ({', '.join(lemmas_to_use)}.)" \
                         f"Make the description more {modification_type} but keep original contents of the description. Modify to a length of approximately {max_length} words. " 
                         
 

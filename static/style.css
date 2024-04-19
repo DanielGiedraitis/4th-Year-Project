@@ -230,22 +230,6 @@ form textarea {
     font-weight: bold;
 }
 
-/* Login Page Button */
-body.login-page form button {
-    width: 80px; 
-    height: 30px; 
-    font-size: 18px; 
-    font-weight: bold;
-}
-
-/* Register Page Button */
-body.register-page form button {
-    width: 80px; 
-    height: 30px; 
-    font-size: 18px; 
-    font-weight: bold;
-}
-
 /* Index Page Button */
 body.index-page form button {
     width: 300px; 
@@ -269,166 +253,97 @@ body.index-page form button {
 }
 
 
-/* Login/Register Page Styles */
-body.login-page,
-body.register-page {
-    background: linear-gradient(-45deg, #C2C094, #827081, #A9A587);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
+/* Common Button Styles */
+body.login-page form button,
+body.register-page form button,
+body.forgot-password-page form button {
+    width: 220px;
+    height: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #4caf50;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
+body.login-page form button:hover,
+body.register-page form button:hover,
+body.forgot-password-page form button:hover {
+    background-color: #45a049;
+}
+
+/* Login Page Styles */
 body.login-page .container,
-body.register-page .container {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
+body.register-page .container,
+body.forgot-password-page .container {
+    background-color: #f9f9f9;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    padding: 40px;
     margin: auto;
-    max-width: 400px;
+    max-width: 450px;
     text-align: center;
+    animation: fadeIn 0.5s ease forwards;
 }
 
 body.login-page h1,
-body.register-page h1 {
-    color: #000000;
-}
-
-body.login-page form,
-body.register-page form {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+body.register-page h1,
+body.forgot-password-page h1 {
+    color: #333333;
+    font-size: 36px;
+    margin-bottom: 30px;
 }
 
 body.login-page label,
-body.register-page label {
+body.register-page label,
+body.forgot-password-page label {
     display: block;
-    margin-bottom: 5px;
-    color: #333333;
+    margin-bottom: 20px;
+    color: #555555;
+    font-size: 20px;
 }
 
 body.login-page input,
 body.register-page input,
-body.login-page button,
-body.register-page button {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
+body.forgot-password-page input {
+    width: calc(100% - 32px);
+    padding: 15px;
+    margin: 10px 0;
     box-sizing: border-box;
-    border: 1px solid #aaaaaa;
-    border-radius: 5px;
+    border: 2px solid #dddddd; 
+    border-radius: 15px;
+    font-size: 20px;
+    transition: border-color 0.3s ease;
 }
 
-body.login-page button,
-body.register-page button {
-    background-color: #4caf50;
-    color: #ffffff;
-    cursor: pointer;
-}
-
-body.login-page button:hover,
-body.register-page button:hover {
-    background-color: #45a049;
+body.login-page input:focus,
+body.register-page input:focus,
+body.forgot-password-page input:focus {
+    border-color: #4caf50;
 }
 
 body.login-page p,
-body.register-page p {
-    margin-top: 15px;
-    color: #555555;
-}
-
-body.login-page form *:first-child,
-body.register-page form *:first-child {
-    margin-top: 0;
-}
-
-body.register-page form button {
-    width: auto; 
-    height: 30px;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-body.login-page form button,
-body.register-page form button {
-    width: auto;
-    height: 30px;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 5px 10px; 
-}
-
-/* Forgot Password Page Button */
-body.forgot-password-page form button {
-    width: auto; 
-    height: 30px; 
-    font-size: 18px; 
-    font-weight: bold;
-    padding: 5px 10px;
-}
-
-/* Forgot Password Page Styles */
-body.forgot-password-page {
-    background: linear-gradient(-45deg, #C2C094, #827081, #A9A587);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-}
-
-body.forgot-password-page .container {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    margin: auto;
-    max-width: 400px;
-    text-align: center;
-}
-
-body.forgot-password-page h1 {
-    color: #000000;
-}
-
-body.forgot-password-page form {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-body.forgot-password-page label {
-    display: block;
-    margin-bottom: 5px;
-    color: #333333;
-}
-
-body.forgot-password-page input,
-body.forgot-password-page button {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 1px solid #aaaaaa;
-    border-radius: 5px;
-}
-
-body.forgot-password-page button {
-    background-color: #4caf50;
-    color: #ffffff;
-    cursor: pointer;
-}
-
-body.forgot-password-page button:hover {
-    background-color: #45a049;
-}
-
+body.register-page p,
 body.forgot-password-page p {
-    margin-top: 15px;
-    color: #555555;
+    margin-top: 30px;
+    color: #777777;
+    font-size: 18px;
 }
 
-body.forgot-password-page form *:first-child {
-    margin-top: 0;
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 
